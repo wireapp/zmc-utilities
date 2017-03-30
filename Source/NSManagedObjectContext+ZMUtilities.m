@@ -70,6 +70,7 @@ static NSTimeInterval const PerformWarningTimeout = 10;
 {
     NSArray *groups = self.allGroups;
     for (ZMSDispatchGroup *g in groups) {
+        NSLog(@"entering: %@", g.label);
         [g enter];
     }
     return groups;
@@ -78,6 +79,7 @@ static NSTimeInterval const PerformWarningTimeout = 10;
 - (void)leaveAllGroups:(NSArray *)groups;
 {
     for (ZMSDispatchGroup *g in groups) {
+        NSLog(@"leaving: %@", g.label);
         [g leave];
     }
 }
