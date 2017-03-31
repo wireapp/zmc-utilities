@@ -75,10 +75,26 @@ static NSTimeInterval const PerformWarningTimeout = 10;
     return groups;
 }
 
+- (NSArray *)enterAllGroupsWithUUID:(NSUUID *)uuid;
+{
+    NSArray *groups = self.allGroups;
+    for (ZMSDispatchGroup *g in groups) {
+        [g enterWithUUID:uuid];
+    }
+    return groups;
+}
+
 - (void)leaveAllGroups:(NSArray *)groups;
 {
     for (ZMSDispatchGroup *g in groups) {
         [g leave];
+    }
+}
+
+- (void)leaveAllGroups:(NSArray *)groups uuid:(NSUUID *)uuid;
+{
+    for (ZMSDispatchGroup *g in groups) {
+        [g leaveWithUUID:uuid];
     }
 }
 
@@ -104,24 +120,26 @@ static NSTimeInterval const PerformWarningTimeout = 10;
 
 - (void)performGroupedBlock:(dispatch_block_t)block;
 {
-    NSArray *groups = [self enterAllGroups];
+    NSUUID *uuid = [NSUUID UUID];
+    NSArray *groups = [self enterAllGroupsWithUUID:uuid];
     ZMSTimePoint *tp = [ZMSTimePoint timePointWithInterval:PerformWarningTimeout];
     [self performBlock:^{
         [tp resetTime];
         block();
-        [self leaveAllGroups:groups];
+        [self leaveAllGroups:groups uuid:uuid];
         [tp warnIfLongerThanInterval];
     }];
 }
 
 - (void)performGroupedBlockAndWait:(dispatch_block_t)block;
 {
-    NSArray *groups = [self enterAllGroups];
+    NSUUID *uuid = [NSUUID UUID];
+    NSArray *groups = [self enterAllGroupsWithUUID:uuid];
     ZMSTimePoint *tp = [ZMSTimePoint timePointWithInterval:PerformWarningTimeout];
     [self performBlockAndWait:^{
         [tp resetTime];
         block();
-        [self leaveAllGroups:groups];
+        [self leaveAllGroups:groups uuid:uuid];
         [tp warnIfLongerThanInterval];
     }];
 }
