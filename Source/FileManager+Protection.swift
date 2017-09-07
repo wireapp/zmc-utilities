@@ -35,7 +35,7 @@ extension FileManager {
                 // Only when building on simulator
                 #if arch(i386) || arch(x86_64)
                 if error.code == CocoaError.fileWriteUnknown.rawValue {
-                    // This error happens when installing app build with iOS10 on iOS11 simulator
+                    // This error happens when installing app built with iOS10 on iOS11 simulator
                     // Seems to be working fine on device or older iOS.
                     return
                 }
