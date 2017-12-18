@@ -23,7 +23,6 @@
 #import <zlib.h>
 #import <CommonCrypto/CommonCrypto.h>
 
-
 @implementation NSData (ZMSorting)
 
 // We need this for the Core Data to be able to compare NSData / sort NSData
@@ -203,3 +202,18 @@
 @end
 
 
+
+@implementation NSData (RandomData)
+
++ (NSString*)base64RandomDataOfSize:(NSUInteger)dataLength
+{
+    NSMutableData* data = [NSMutableData dataWithCapacity:dataLength];
+    for(unsigned int i = 0; i < dataLength / 4; i++) {
+        u_int32_t randomBits = arc4random();
+        [data appendBytes:(void*)&randomBits length:4];
+    }
+    NSString *base64String = [data base64EncodedStringWithOptions:0];
+    return base64String;
+}
+
+@end

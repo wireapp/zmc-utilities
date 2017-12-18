@@ -19,7 +19,11 @@
 
 #import <Foundation/Foundation.h>
 
+@interface NSData (RandomData)
 
++ (NSString*)base64RandomDataOfSize:(NSUInteger)dataLength;
+
+@end
 
 @interface NSData (ZMSorting)
 
