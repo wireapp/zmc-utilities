@@ -59,6 +59,6 @@ public extension String {
         let result = normalizedFilename[start..<end]
         let trimmedFilename = String(result)
         
-        return trimmedFilename ?? ""
+        return trimmedFilename
     }
 }

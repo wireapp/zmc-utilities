@@ -787,11 +787,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				TargetAttributes = {
 					09F028CD1B78BE2700BADDB6 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = W5KEQBF9B5;
+						LastSwiftMigration = 0900;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -801,11 +802,11 @@
 					3E88BD371B1F3EA300232589 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = W5KEQBF9B5;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					3E88BD421B1F3EA300232589 = {
 						CreatedOnToolsVersion = 6.3.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						TestTargetID = 09F028CD1B78BE2700BADDB6;
 					};
 				};
@@ -1028,6 +1029,8 @@
 				INFOPLIST_FILE = "WireUtilities-tests-host/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wire.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				WIRE_BUNDLE_ID = "com.wearezeta.zclient-alpha";
 			};
 			name = Debug;
@@ -1042,6 +1045,8 @@
 				INFOPLIST_FILE = "WireUtilities-tests-host/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wire.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				WIRE_BUNDLE_ID = "com.wearezeta.zclient-alpha";
 			};
 			name = Release;
@@ -1050,6 +1055,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 54B863F01EF40B12008FDDCE /* project-debug.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 			};
 			name = Debug;
 		};
@@ -1057,6 +1070,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 54B863F11EF40B12008FDDCE /* project.xcconfig */;
 			buildSettings = {
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 			};
 			name = Release;
 		};
@@ -1067,6 +1089,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/WireUtilities-Info.plist";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wire.$(PRODUCT_NAME:rfc1034identifier)";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1077,6 +1100,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/WireUtilities-Info.plist";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wire.$(PRODUCT_NAME:rfc1034identifier)";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1088,6 +1112,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wire.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "WireUtilities-Tests";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tests/WireUtilities-ios-tests-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WireUtilities-tests-host.app/WireUtilities-tests-host";
 			};
 			name = Debug;
@@ -1100,6 +1125,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wire.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "WireUtilities-Tests";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tests/WireUtilities-ios-tests-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WireUtilities-tests-host.app/WireUtilities-tests-host";
 			};
 			name = Release;
