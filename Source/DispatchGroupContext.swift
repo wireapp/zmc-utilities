@@ -23,7 +23,7 @@ public class DispatchGroupContext : NSObject {
     private var isolationQueue = DispatchQueue(label: "context.isolation", attributes: [.concurrent])
     private var _groups : [ZMSDispatchGroup] = []
     
-    public var groups : [ZMSDispatchGroup] {
+    @objc public var groups : [ZMSDispatchGroup] {
         var groups : [ZMSDispatchGroup] = []
         isolationQueue.sync {
             groups = self._groups
@@ -32,7 +32,7 @@ public class DispatchGroupContext : NSObject {
     }
     
     
-    init(groups: [ZMSDispatchGroup] = []) {
+    @objc init(groups: [ZMSDispatchGroup] = []) {
         super.init()
         
         isolationQueue.async(flags: .barrier) {
