@@ -68,3 +68,19 @@ public extension VoidResult {
         return error
     }
 }
+
+extension Result {
+    public enum ResultError: Error {
+        case nilResult
+    }
+    
+    public init(optional: T?) {
+        switch optional {
+        case .some(let value):
+            self = Result.success(value)
+        case .none:
+            self = Result.failure(ResultError.nilResult)
+        }
+    }
+}
+

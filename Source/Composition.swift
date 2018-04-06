@@ -23,3 +23,52 @@ infix operator >>> : AdditionPrecedence
 public func >>> <A, B, C>(f: @escaping (B) -> C, g: @escaping (A) -> B) -> (A) -> C {
     return { x in f(g(x)) }
 }
+
+// Direct promise version.
+public func >>> <A, B, C>(f: @escaping (B) -> C, g: @escaping (A) -> Promise<B>) -> (A) -> Promise<C> {
+    return { x in
+        let resultPromise = Promise<C>()
+        g(x).whenDone { resultPromise.fulfill(with: $0.map(f)) }
+        return resultPromise
+    }
+}
+
+// Indirect promise version with g having a second parameter callback returning B.
+public func >>> <A, B, C>(f: @escaping (B) -> C, g: @escaping (A, @escaping (B) -> Void) -> Void) -> (A) -> Promise<C> {
+    return { x in
+        let resultPromise = Promise<C>()
+        let completion: (B)->() = {
+            resultPromise.fulfill(with: Result<C>.success(f($0)))
+        }
+        g(x, completion)
+        return resultPromise
+    }
+}
+
+// Indirect promise version with g having a second parameter callback returning B.
+public func >>> <A, B, C>(f: @escaping (B) -> C, g: @escaping (A, @escaping (Result<B>) -> Void) -> Void) -> (A) -> Promise<C> {
+    return { x in
+        let resultPromise = Promise<C>()
+        let completion: (Result<B>)->() = {
+            switch $0 {
+            case .success(let result):
+                resultPromise.fulfill(with: Result<C>.success(f(result)))
+            case .failure(let error):
+                resultPromise.fulfill(with: Result<C>.failure(error))
+            }
+        }
+        g(x, completion)
+        return resultPromise
+    }
+}
+
+public func >>> <A, B, C>(f: @escaping (B, @escaping (C) -> Void) -> Void, g: @escaping (A) -> (B)) -> (A) -> Promise<C> {
+    return { x in
+        let resultPromise = Promise<C>()
+        let completion: (C)->() = {
+            resultPromise.fulfill(with: Result<C>.success($0))
+        }
+        f(g(x), completion)
+        return resultPromise
+    }
+}
