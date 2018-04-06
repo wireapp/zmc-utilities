@@ -24,41 +24,6 @@ public func >>> <A, B, C>(f: @escaping (B) -> C, g: @escaping (A) -> B) -> (A) -
     return { x in f(g(x)) }
 }
 
-public final class Promise<T> {
-    public typealias Completion = (Result<T>)->()
-    
-    private var onDone: [Completion] = []
-    
-    private var isDone: Bool = false
-    
-    public init() {}
-    
-    public func whenDone(do completion: @escaping Completion) {
-        assert(!isDone)
-        onDone.append(completion)
-    }
-    
-    public func fulfill(with result: Result<T>) {
-        onDone.forEach { $0(result) }
-        isDone = true
-    }
-}
-
-extension Result {
-    public enum ResultError: Error {
-        case nilResult
-    }
-    
-    public init(optional: T?) {
-        switch optional {
-        case .some(let value):
-            self = Result.success(value)
-        case .none:
-            self = Result.failure(ResultError.nilResult)
-        }
-    }
-}
-
 // Direct promise version.
 public func >>> <A, B, C>(f: @escaping (B) -> C, g: @escaping (A) -> Promise<B>) -> (A) -> Promise<C> {
     return { x in
@@ -69,7 +34,7 @@ public func >>> <A, B, C>(f: @escaping (B) -> C, g: @escaping (A) -> Promise<B>)
 }
 
 // Indirect promise version with g having a second parameter callback returning B.
-public func >>> <A, B, C>(f: @escaping (B) -> C, g: @escaping (A, (B) -> Void) -> Void) -> (A) -> Promise<C> {
+public func >>> <A, B, C>(f: @escaping (B) -> C, g: @escaping (A, @escaping (B) -> Void) -> Void) -> (A) -> Promise<C> {
     return { x in
         let resultPromise = Promise<C>()
         let completion: (B)->() = {
@@ -80,7 +45,24 @@ public func >>> <A, B, C>(f: @escaping (B) -> C, g: @escaping (A, (B) -> Void) -
     }
 }
 
-public func >>> <A, B, C>(f: @escaping (B, (C) -> Void) -> Void, g: @escaping (A) -> (B)) -> (A) -> Promise<C> {
+// Indirect promise version with g having a second parameter callback returning B.
+public func >>> <A, B, C>(f: @escaping (B) -> C, g: @escaping (A, @escaping (Result<B>) -> Void) -> Void) -> (A) -> Promise<C> {
+    return { x in
+        let resultPromise = Promise<C>()
+        let completion: (Result<B>)->() = {
+            switch $0 {
+            case .success(let result):
+                resultPromise.fulfill(with: Result<C>.success(f(result)))
+            case .failure(let error):
+                resultPromise.fulfill(with: Result<C>.failure(error))
+            }
+        }
+        g(x, completion)
+        return resultPromise
+    }
+}
+
+public func >>> <A, B, C>(f: @escaping (B, @escaping (C) -> Void) -> Void, g: @escaping (A) -> (B)) -> (A) -> Promise<C> {
     return { x in
         let resultPromise = Promise<C>()
         let completion: (C)->() = {
