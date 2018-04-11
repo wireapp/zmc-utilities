@@ -38,6 +38,13 @@ final class NSManagedObjectContext_SwiftTests: XCTestCase {
         super.tearDown()
     }
     
+    func testThatItWorksWithoutGroups() {
+        // given
+        let moc = ZMMockManagedObjectContextFactory.testManagedObjectContext(withConcurencyType: .privateQueueConcurrencyType)!
+        // when & then
+        moc.performGroupedAndWait { _ in }
+    }
+    
     func testThatItPassesSelfInTheClosure() {
         // when & then
         sut.performGroupedAndWait { [sut] moc in

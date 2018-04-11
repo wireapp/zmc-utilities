@@ -24,13 +24,15 @@ public extension NSManagedObjectContext {
 
     @discardableResult func performGroupedAndWait<T>(_ execute: @escaping (NSManagedObjectContext) -> T) -> T {
         var result: T!
-        let groups = dispatchGroupContext.enterAll(except: nil)
+        let groups = dispatchGroupContext?.enterAll(except: nil)
         let tp = ZMSTimePoint(interval: NSManagedObjectContext.timeout)
         
         performAndWait {
             tp?.resetTime()
             result = execute(self)
-            dispatchGroupContext.leave(groups)
+            groups.apply {
+                dispatchGroupContext?.leave($0)
+            }
             tp?.warnIfLongerThanInterval()
         }
         
@@ -40,14 +42,16 @@ public extension NSManagedObjectContext {
     @discardableResult func performGroupedAndWait<T>(_ execute: @escaping (NSManagedObjectContext) throws -> T) throws -> T {
         var result: T!
         var thrownError: Error?
-        let groups = dispatchGroupContext.enterAll(except: nil)
+        let groups = dispatchGroupContext?.enterAll(except: nil)
         let tp = ZMSTimePoint(interval: NSManagedObjectContext.timeout)
         
         performAndWait {
             do {
                 tp?.resetTime()
                 result = try execute(self)
-                dispatchGroupContext.leave(groups)
+                groups.apply {
+                    dispatchGroupContext?.leave($0)
+                }
                 tp?.warnIfLongerThanInterval()
             } catch {
                 thrownError = error
