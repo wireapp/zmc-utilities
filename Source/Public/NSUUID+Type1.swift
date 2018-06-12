@@ -88,7 +88,7 @@ public extension NSUUID {
         let uuidPointer = UnsafeMutablePointer<UInt8>.allocate(capacity: uuidSize)
         uuid_generate_time(uuidPointer)
         let uuid = NSUUID(uuidBytes: uuidPointer) as NSUUID
-        uuidPointer.deallocate(capacity: uuidSize)
+        uuidPointer.deallocate()
         return uuid
     }
 }
