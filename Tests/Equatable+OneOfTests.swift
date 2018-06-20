@@ -66,6 +66,6 @@ class EquatableOneOfTests : XCTestCase {
         let sut = 42
         
         // Then
-        XCTAssert(sut.isOne(of: Set([43, 45, 0])))
+        XCTAssert(sut.isOne(of: Set([42, 43, 45, 0])))
     }
 }
