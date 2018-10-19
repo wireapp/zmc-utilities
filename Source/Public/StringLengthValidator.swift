@@ -45,13 +45,25 @@ import Foundation
         guard let string = ioValue.pointee as? String else {
             throw StringLengthError.tooShort
         }
-        
+
         var trimmedString = string.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        while let range = trimmedString.rangeOfCharacter(from: controlSet) {
-            trimmedString.replaceSubrange(range, with: " ")
+
+        var filteredString = ""
+
+        let startIndex = trimmedString.startIndex
+        for i in 0..<trimmedString.count {
+            let index = trimmedString.index(startIndex, offsetBy: i)
+
+            let singleChar = String(trimmedString[index])
+            if singleChar.containsOnlyEmoji || !singleChar.existsIn(characterSet: controlSet) {
+                filteredString += singleChar
+            } else {
+                filteredString += " "
+            }
         }
-        
+
+        trimmedString = filteredString
+
         if trimmedString.count < minimumStringLength {
             throw StringLengthError.tooShort
         }
