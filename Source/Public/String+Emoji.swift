@@ -80,7 +80,7 @@ extension String {
         return components(separatedBy: .whitespaces).joined().containsOnlyEmoji
     }
 
-    public var containsOnlyEmoji: Bool {
+    var containsOnlyEmoji: Bool {
         guard count > 0 else { return false }
 
         let cancelTag = Unicode.Scalar.cancelTag
