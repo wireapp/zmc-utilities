@@ -48,21 +48,12 @@ import Foundation
 
         var trimmedString = string.trimmingCharacters(in: .whitespacesAndNewlines)
 
-        var filteredString = ""
+        // check the trimmedString contains controlSet characters and replace matchings with spaces
 
-        let startIndex = trimmedString.startIndex
-        for i in 0..<trimmedString.count {
-            let index = trimmedString.index(startIndex, offsetBy: i)
-
-            let singleChar = String(trimmedString[index])
-            if singleChar.containsOnlyEmoji || !singleChar.existsIn(characterSet: controlSet) {
-                filteredString += singleChar
-            } else {
-                filteredString += " "
-            }
-        }
-
-        trimmedString = filteredString
+        trimmedString = trimmedString
+            .map{ String($0)}
+            .map{$0.containsOnlyEmoji || !$0.existsIn(characterSet: controlSet) ? $0 : " "}
+            .joined()
 
         if trimmedString.count < minimumStringLength {
             throw StringLengthError.tooShort
