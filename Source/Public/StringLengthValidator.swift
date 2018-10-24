@@ -51,8 +51,7 @@ import Foundation
         // check the trimmedString contains controlSet characters and replace matchings with spaces
 
         trimmedString = trimmedString
-            .map{ String($0) }
-            .map{ $0.containsOnlyEmoji || !$0.existsIn(characterSet: controlSet) ? $0 : " " }
+            .map{ $0.isEmoji || !$0.contains(anyCharacterFrom: controlSet) ? String($0) : " " }
             .joined()
 
         if trimmedString.count < minimumStringLength {

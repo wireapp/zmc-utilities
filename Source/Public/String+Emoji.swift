@@ -50,26 +50,35 @@ extension Unicode.Scalar {
     
 }
 
-extension String {
-    public func existsIn(characterSet: CharacterSet) -> Bool {
-        for char in self {
-            for scalar in char.unicodeScalars {
-                if characterSet.contains(scalar) {
-                    return true
-                }
+extension Character {
+    var isEmoji: Bool {
+        for scalar in self.unicodeScalars {
+            if scalar.isEmoji {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    public func contains(anyCharacterFrom characterSet: CharacterSet) -> Bool {
+        for scalar in self.unicodeScalars {
+            if characterSet.contains(scalar) {
+                return true
             }
         }
         return false
     }
 
+}
+
+extension String {
     public var containsEmoji: Bool {
         guard count > 0 else { return false }
 
         for char in self {
-            for scalar in char.unicodeScalars {
-                if scalar.isEmoji {
-                    return true
-                }
+            if char.isEmoji {
+                return true
             }
         }
 
