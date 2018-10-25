@@ -20,10 +20,6 @@ extension CharacterSet {
     static let asciiPrintableSet = CharacterSet(charactersIn: "!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~")
 }
 
-extension UInt32 {
-    static let cancelTag: UInt32 = 0xE007F
-}
-
 extension Unicode.Scalar {
     static let cancelTag: Unicode.Scalar = Unicode.Scalar(UInt32.cancelTag)!
 
@@ -33,7 +29,7 @@ extension Unicode.Scalar {
         0x2139,            // the info symobol
         0x2030...0x2BFF,   // Misc symbols
         0x2600...0x27BF,   // Misc symbols, Dingbats
-        UInt32.cancelTag,
+        0xE007F,           // cancelTag
         0xFE00...0xFE0F:   // Variation Selectors
             return true
         default:
