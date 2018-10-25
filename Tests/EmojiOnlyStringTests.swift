@@ -30,7 +30,7 @@ class EmojiOnlyStringTests: XCTestCase {
                            "👩", "👩🏻", "👩🏼", "👩🏽", "👩🏾", "👩🏿", //Fitzpatrick modifiers
                            "👨‍👩‍👧", "🏳️‍🌈", // Joining
                            "🧘🏿‍♀️", "🧡", "🦒", "🧦", "🏴󠁧󠁢󠁷󠁬󠁳󠁿", "🧟‍♂️", ///Emoji 5.0
-            //                           "🥮" // TODO: Emoji 11.0, first support in iOS 12.1
+            // TODO: Test for Emoji 11.0 new emoji "🥮" after iOS 12.1 is released
         ]
 
         // then
@@ -98,9 +98,10 @@ class EmojiOnlyStringTests: XCTestCase {
 
     func testThatLangaugeStringIsNotDetected() {
         // given
+
+        //Notice: "⿆" - Kangxi Radicals, start from U0x2F0x it is not a emoji, but CharacterSet.symbols contains it.
         let langaugeStrings = ["ḀẀẶỳ", "ठःअठी३", "勺卉善爨", "Ёжик", "한국어",
                                "ⰀⰁ", //Glagolitic, start from U0x2C0x, containsEmoji return true for this language
-            //"⿆", //Kangxi Radicals, start from U0x2F0x it is not a emoji, but CharacterSet.symbols contains it.
             "はい",// Hiragana, start from U0x304x
             "ブ",// Katakana, start from U0x304x
             "ㄅㄆㄇ", //Bopomofo, start from U0x310x
