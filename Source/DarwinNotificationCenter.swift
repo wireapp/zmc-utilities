@@ -32,7 +32,10 @@ public class DarwinNotificationCenter {
     
     /// Invokes the given handler when the given notification is fired.
     public func observe(notification: DarwinNotification, using handler: @escaping Handler) {
-        handlers[notification, default: []].append(handler)
+        defer { handlers[notification, default: []].append(handler) }
+        
+        // we only want to internally observe each notification once
+        guard handlers[notification] == nil else { return }
         
         notification.observe { (_, _, name, _, _) in
             guard let name = name else { return }
