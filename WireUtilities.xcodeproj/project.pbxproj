@@ -873,9 +873,9 @@
 			productReference = 3E88BD381B1F3EA300232589 /* WireUtilities.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		3E88BD421B1F3EA300232589 /* WireUtilities-tests */ = {
+		3E88BD421B1F3EA300232589 /* WireUtilities-Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3E88BD4F1B1F3EA300232589 /* Build configuration list for PBXNativeTarget "WireUtilities-tests" */;
+			buildConfigurationList = 3E88BD4F1B1F3EA300232589 /* Build configuration list for PBXNativeTarget "WireUtilities-Tests" */;
 			buildPhases = (
 				3E88BD3F1B1F3EA300232589 /* Sources */,
 				3E88BD401B1F3EA300232589 /* Frameworks */,
@@ -888,7 +888,7 @@
 				540EF2841EFD14AA00C6C6B5 /* PBXTargetDependency */,
 				3E88BD461B1F3EA300232589 /* PBXTargetDependency */,
 			);
-			name = "WireUtilities-tests";
+			name = "WireUtilities-Tests";
 			productName = WireUtilitiesTests;
 			productReference = 3E88BD431B1F3EA300232589 /* WireUtilities-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -937,7 +937,7 @@
 			projectRoot = "";
 			targets = (
 				3E88BD371B1F3EA300232589 /* WireUtilities */,
-				3E88BD421B1F3EA300232589 /* WireUtilities-tests */,
+				3E88BD421B1F3EA300232589 /* WireUtilities-Tests */,
 				09F028CD1B78BE2700BADDB6 /* WireUtilities-tests-host */,
 			);
 		};
@@ -1310,7 +1310,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3E88BD4F1B1F3EA300232589 /* Build configuration list for PBXNativeTarget "WireUtilities-tests" */ = {
+		3E88BD4F1B1F3EA300232589 /* Build configuration list for PBXNativeTarget "WireUtilities-Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3E88BD501B1F3EA300232589 /* Debug */,
