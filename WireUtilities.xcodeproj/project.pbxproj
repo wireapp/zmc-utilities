@@ -90,6 +90,7 @@
 		5E39FC52225B350700C682B8 /* PasswordRuleSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E39FC51225B350700C682B8 /* PasswordRuleSet.swift */; };
 		5E39FC55225B399D00C682B8 /* PasswordCharacterClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E39FC54225B399D00C682B8 /* PasswordCharacterClass.swift */; };
 		5E39FC59225B55F200C682B8 /* PasswordValidationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E39FC58225B55F200C682B8 /* PasswordValidationResult.swift */; };
+		5E39FC5B225B747600C682B8 /* PasswordRuleSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E39FC5A225B747600C682B8 /* PasswordRuleSetTests.swift */; };
 		5E4BC1BC2189E6A400A8682E /* AnyProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4BC1BB2189E6A400A8682E /* AnyProperty.swift */; };
 		5E4BC1BE2189EA3900A8682E /* AnyPropertyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4BC1BD2189EA3900A8682E /* AnyPropertyTests.swift */; };
 		5E4BC1C6218C830500A8682E /* String+Spaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4BC1C5218C830500A8682E /* String+Spaces.swift */; };
@@ -332,6 +333,7 @@
 		5E39FC51225B350700C682B8 /* PasswordRuleSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRuleSet.swift; sourceTree = "<group>"; };
 		5E39FC54225B399D00C682B8 /* PasswordCharacterClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCharacterClass.swift; sourceTree = "<group>"; };
 		5E39FC58225B55F200C682B8 /* PasswordValidationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidationResult.swift; sourceTree = "<group>"; };
+		5E39FC5A225B747600C682B8 /* PasswordRuleSetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRuleSetTests.swift; sourceTree = "<group>"; };
 		5E4BC1BB2189E6A400A8682E /* AnyProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyProperty.swift; sourceTree = "<group>"; };
 		5E4BC1BD2189EA3900A8682E /* AnyPropertyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyPropertyTests.swift; sourceTree = "<group>"; };
 		5E4BC1C5218C830500A8682E /* String+Spaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Spaces.swift"; sourceTree = "<group>"; };
@@ -787,6 +789,7 @@
 				EE1E357321E796F100F1144B /* DarwinNotificationCenterTests.swift */,
 				16B75F67222EE3A000DCAFF2 /* String+StrippingTests.swift */,
 				5E9EA4C222423EA600D401B2 /* ArraySafeIndexTests.swift */,
+				5E39FC5A225B747600C682B8 /* PasswordRuleSetTests.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -1115,6 +1118,7 @@
 				16030DC221AEA14100F8032E /* ArrayPartitionByKeyPathTests.swift in Sources */,
 				F9C9A78E1CAEA0110039E10C /* NSString_NormalizationTests.m in Sources */,
 				BFBAE9DD1E01A930003FCE49 /* String+EmojiTests.swift in Sources */,
+				5E39FC5B225B747600C682B8 /* PasswordRuleSetTests.swift in Sources */,
 				871E12351C4FEED200862958 /* UnownedNSObjectTests.swift in Sources */,
 				F9D381B01B70B94300E6E4EB /* ZMFunctionalTests.m in Sources */,
 				BFA2F03920C9490500EBE97C /* FunctionOperatorTests.swift in Sources */,

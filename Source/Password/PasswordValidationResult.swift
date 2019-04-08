@@ -37,6 +37,6 @@ public enum PasswordValidationResult: Equatable {
     case disallowedCharacter(Unicode.Scalar)
 
     /// The password does not satisfy a requirement for a character class.
-    case missingRequiredCharacters(Set<PasswordCharacterClass>)
+    case missingRequiredClasses(Set<PasswordCharacterClass>)
 
 }

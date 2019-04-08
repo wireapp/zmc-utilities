@@ -74,16 +74,16 @@ public struct PasswordRuleSet: Decodable {
     // MARK: - Codable
 
     private enum CodingKeys: String, CodingKey {
-        case minimumLength = "minimumLength"
-        case maximumLength = "maximumLength"
-        case allowedCharacters = "allowedCharacters"
-        case requiredCharacters = "requiredCharacters"
+        case minimumLength = "minimum-length"
+        case maximumLength = "maximum-length"
+        case allowedCharacters = "allowed-characters"
+        case requiredCharacters = "required-characters"
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let minimumLength = try container.decode(UInt.self, forKey: .allowedCharacters)
-        let maximumLength = try container.decode(UInt.self, forKey: .requiredCharacters)
+        let minimumLength = try container.decode(UInt.self, forKey: .minimumLength)
+        let maximumLength = try container.decode(UInt.self, forKey: .maximumLength)
         let allowedCharacters = try container.decode(Set<PasswordCharacterClass>.self, forKey: .allowedCharacters)
         let requiredCharacters = try container.decode(Set<PasswordCharacterClass>.self, forKey: .requiredCharacters)
         self.init(minimumLength: minimumLength, maximumLength: maximumLength, allowedCharacters: allowedCharacters, requiredCharacters: requiredCharacters)
@@ -93,9 +93,9 @@ public struct PasswordRuleSet: Decodable {
 
     /// Encodes the rules in the format used by the Apple keychain.
     public func encodeInKeychainFormat() -> String {
-        let allowed = allowedCharacters.reduce(into: "") { $0 += "allowed: \($1.rawValue);" }
-        let required = requiredCharacterSets.keys.reduce(into: "") { $0 += "required: \($1.rawValue);" }
-        return "minlength: \(minimumLength); maxlength: \(maximumLength); \(allowed) \(required)"
+        let allowed = allowedCharacters.map({ "allowed: \($0.rawValue)" }).joined(separator: "; ")
+        let required = requiredCharacterSets.keys.map({ "required: \($0.rawValue)" }).joined(separator: "; ")
+        return "minlength: \(minimumLength); maxlength: \(maximumLength); \(allowed); \(required);"
     }
 
     // MARK: - Validation
@@ -133,15 +133,14 @@ public struct PasswordRuleSet: Decodable {
                     matchedRequiredClasses.insert(requiredClass)
                 }
             }
-
-            // Check early if all the character classes are matched.
-            if requiredClasses.all(matchedRequiredClasses.contains) {
-                return .valid
-            }
         }
 
-        // If all the required character classes are not matched, we return an error.
-        return .missingRequiredCharacters(requiredClasses.subtracting(matchedRequiredClasses))
+        // Check if all the character classes are matched.
+        if requiredClasses.all(matchedRequiredClasses.contains) {
+            return .valid
+        } else {
+            return .missingRequiredClasses(requiredClasses.subtracting(matchedRequiredClasses))
+        }
     }
 
 }
