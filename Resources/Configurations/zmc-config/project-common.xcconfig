@@ -56,8 +56,6 @@ ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
 SWIFT_COMPILATION_MODE = wholemodule
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @loader_path/Frameworks @loader_path/../Frameworks @executable_path/Frameworks @executable_path/../Frameworks
 
-
-
 // Swift
 //
 DEFINES_MODULE = YES
@@ -87,7 +85,6 @@ VERSIONING_SYSTEM = apple-generic
 
 // Linking
 //
-LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks @executable_path/../Frameworks @loader_path/../Frameworks
 
 // LLVM - Code Generation
 //
