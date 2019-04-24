@@ -914,11 +914,11 @@
 					3E88BD371B1F3EA300232589 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = W5KEQBF9B5;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 					3E88BD421B1F3EA300232589 = {
 						CreatedOnToolsVersion = 6.3.2;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						TestTargetID = 09F028CD1B78BE2700BADDB6;
 					};
 				};
@@ -928,6 +928,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1240,7 +1241,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/WireUtilities-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wire.$(PRODUCT_NAME:rfc1034identifier)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1250,7 +1251,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/WireUtilities-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wire.$(PRODUCT_NAME:rfc1034identifier)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1262,7 +1263,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wire.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "WireUtilities-Tests";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tests/WireUtilities-ios-tests-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WireUtilities-tests-host.app/WireUtilities-tests-host";
 			};
 			name = Debug;
@@ -1275,7 +1276,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wire.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "WireUtilities-Tests";
 				SWIFT_OBJC_BRIDGING_HEADER = "Tests/WireUtilities-ios-tests-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WireUtilities-tests-host.app/WireUtilities-tests-host";
 			};
 			name = Release;
