@@ -54,7 +54,8 @@ VERSIONING_SYSTEM = apple-generic
 
 // Linking
 //
-LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @loader_path/Frameworks @loader_path/../Frameworks @executable_path/Frameworks @executable_path/../Frameworks
+
 FRAMEWORK_SEARCH_PATHS = $(inherited) $(PLATFORM_DIR)/Developer/Library/Frameworks
 
 // LLVM - Code Generation
@@ -96,3 +97,6 @@ ENABLE_NS_ASSERTIONS = YES
 
 
 
+SWIFT_VERSION = 3.0
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+SWIFT_COMPILATION_MODE = wholemodule
