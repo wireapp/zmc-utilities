@@ -391,7 +391,6 @@
 		EFD003552179FABC008C20D3 /* StringLengthValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLengthValidatorTests.swift; sourceTree = "<group>"; };
 		F15BDB1D20889772002F36E8 /* TearDownCapable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TearDownCapable.swift; sourceTree = "<group>"; };
 		F1E148C0207BAECF00F81833 /* ios-test-host.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "ios-test-host.xcconfig"; sourceTree = "<group>"; };
-		F1E148C1207BAED000F81833 /* swift.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = swift.xcconfig; sourceTree = "<group>"; };
 		F1E148C2207BAED000F81833 /* tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = tests.xcconfig; sourceTree = "<group>"; };
 		F1E148C4207BAED000F81833 /* project-debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "project-debug.xcconfig"; sourceTree = "<group>"; };
 		F1E148C5207BAED000F81833 /* warnings-debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "warnings-debug.xcconfig"; sourceTree = "<group>"; };
@@ -623,7 +622,6 @@
 				F1E148C7207BAED000F81833 /* project-common.xcconfig */,
 				F1E148C4207BAED000F81833 /* project-debug.xcconfig */,
 				F1E148CC207BAED000F81833 /* project.xcconfig */,
-				F1E148C1207BAED000F81833 /* swift.xcconfig */,
 				F1E148C2207BAED000F81833 /* tests.xcconfig */,
 				F1E148C5207BAED000F81833 /* warnings-debug.xcconfig */,
 				F1E148CB207BAED000F81833 /* warnings.xcconfig */,
@@ -914,18 +912,18 @@
 					3E88BD371B1F3EA300232589 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = W5KEQBF9B5;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 					3E88BD421B1F3EA300232589 = {
 						CreatedOnToolsVersion = 6.3.2;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						TestTargetID = 09F028CD1B78BE2700BADDB6;
 					};
 				};
 			};
 			buildConfigurationList = 3E88BD2D1B1F3E8400232589 /* Build configuration list for PBXProject "WireUtilities" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				English,
@@ -1217,7 +1215,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F1E148C4207BAED000F81833 /* project-debug.xcconfig */;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 			};
 			name = Debug;
@@ -1226,7 +1223,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F1E148CC207BAED000F81833 /* project.xcconfig */;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 			};
 			name = Release;
