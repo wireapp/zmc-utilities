@@ -19,6 +19,27 @@
 import Foundation
 
 public extension Data {
+    init(uuid: UUID) {
+        let uuidTuple = uuid.uuid
+
+        let bytes: [UInt8] = [uuidTuple.0,
+                              uuidTuple.1,
+                              uuidTuple.2,
+                              uuidTuple.3,
+                              uuidTuple.4,
+                              uuidTuple.5,
+                              uuidTuple.6,
+                              uuidTuple.7,
+                              uuidTuple.8,
+                              uuidTuple.9,
+                              uuidTuple.10,
+                              uuidTuple.11,
+                              uuidTuple.12,
+                              uuidTuple.13,
+                              uuidTuple.14,
+                              uuidTuple.15]
+        self.init(bytes: bytes)
+    }
 }
 
 
@@ -47,29 +68,5 @@ public extension UUID {
                                  bytes[15])
 
         self.init(uuid: uuidTuple)
-    }
-
-    var toData: Data {
-        let uuidTuple = uuid
-
-        let bytes: [UInt8] = [uuidTuple.0,
-                              uuidTuple.1,
-                              uuidTuple.2,
-                              uuidTuple.3,
-                              uuidTuple.4,
-                              uuidTuple.5,
-                              uuidTuple.6,
-                              uuidTuple.7,
-                              uuidTuple.8,
-                              uuidTuple.9,
-                              uuidTuple.10,
-                              uuidTuple.11,
-                              uuidTuple.12,
-                              uuidTuple.13,
-                              uuidTuple.14,
-                              uuidTuple.15]
-        let data = Data(bytes: bytes)
-
-        return data
     }
 }

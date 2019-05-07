@@ -23,15 +23,15 @@ import XCTest
 final class DataUUIDTests: XCTestCase {
     func testThatUUIDisConvertedToData() {
         //GIVEN
-        let uuid = UUID(uuidString: "00010203-0405-0607-0809-0a0b0c0d0e0f")
+        let uuid = UUID(uuidString: "00010203-0405-0607-0809-0a0b0c0d0e0f")!
 
         //WHEN
-        let data = uuid?.toData
+        let data = Data(uuid: uuid)
 
-        XCTAssertEqual(data?.count, 16)
+        XCTAssertEqual(data.count, 16)
 
         //THEN
-        let bytes = [UInt8](data!)
+        let bytes = [UInt8](data)
         XCTAssertEqual(bytes, [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
     }
 
