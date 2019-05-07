@@ -22,7 +22,7 @@ extension Data {
     var toUUID: UUID? {
         let bytes = [UInt8](self)
 
-        let uuidTriple: uuid_t = (bytes[0],
+        let uuidTuple: uuid_t = (bytes[0],
                                   bytes[1],
                                   bytes[2],
                                   bytes[3],
@@ -39,13 +39,33 @@ extension Data {
                                   bytes[14],
                                   bytes[15])
 
-        return UUID(uuid: uuidTriple)
+        return UUID(uuid: uuidTuple)
     }
 }
 
 
 extension UUID {
     var toData: Data? {
-        return (self as NSUUID?)?.data()
+        let uuidTuple = uuid
+
+        let bytes: [UInt8] = [uuidTuple.0,
+                              uuidTuple.1,
+                              uuidTuple.2,
+                              uuidTuple.3,
+                              uuidTuple.4,
+                              uuidTuple.5,
+                              uuidTuple.6,
+                              uuidTuple.7,
+                              uuidTuple.8,
+                              uuidTuple.9,
+                              uuidTuple.10,
+                              uuidTuple.11,
+                              uuidTuple.12,
+                              uuidTuple.13,
+                              uuidTuple.14,
+                              uuidTuple.15]
+        let data = Data(bytes: bytes)
+
+        return data
     }
 }
