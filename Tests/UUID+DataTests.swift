@@ -20,13 +20,13 @@
 import XCTest
 @testable import WireUtilities
 
-final class DataUUIDTests: XCTestCase {
+final class UUIDtoDataConversionTests: XCTestCase {
     func testThatUUIDisConvertedToData() {
         //GIVEN
         let uuid = UUID(uuidString: "00010203-0405-0607-0809-0a0b0c0d0e0f")!
 
         //WHEN
-        let data = Data(uuid: uuid)
+        let data = uuid.uuidData
 
         XCTAssertEqual(data.count, 16)
 
