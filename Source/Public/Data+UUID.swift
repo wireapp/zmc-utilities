@@ -18,7 +18,7 @@
 
 import Foundation
 
-extension Data {
+public extension Data {
     var toUUID: UUID? {
         let bytes = [UInt8](self)
 
@@ -44,7 +44,7 @@ extension Data {
 }
 
 
-extension UUID {
+public extension UUID {
     var toData: Data? {
         let uuidTuple = uuid
 
