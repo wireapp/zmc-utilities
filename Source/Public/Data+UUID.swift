@@ -20,6 +20,8 @@ import Foundation
 
 public extension Data {
     var toUUID: UUID? {
+        guard count == 16 else { return nil }
+
         let bytes = [UInt8](self)
 
         let uuidTuple: uuid_t = (bytes[0],
@@ -45,7 +47,7 @@ public extension Data {
 
 
 public extension UUID {
-    var toData: Data? {
+    var toData: Data {
         let uuidTuple = uuid
 
         let bytes: [UInt8] = [uuidTuple.0,
