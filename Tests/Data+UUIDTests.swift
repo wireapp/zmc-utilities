@@ -20,7 +20,7 @@
 import XCTest
 @testable import WireUtilities
 
-final class UUIDDataConversionTests: XCTestCase {
+final class DataUUIDTests: XCTestCase {
     func testThatUUIDisConvertedToData() {
         //GIVEN
         let uuid = UUID(uuidString: "00010203-0405-0607-0809-0a0b0c0d0e0f")
@@ -41,7 +41,7 @@ final class UUIDDataConversionTests: XCTestCase {
         let data = Data(bytes: bytes)
 
         //WHEN
-        let uuid = data.toUUID
+        let uuid = UUID(data: data)
 
         //THEN
         XCTAssertEqual(uuid, UUID(uuidString: "00010203-0405-0607-0809-0a0b0c0d0e0f"))
@@ -49,7 +49,7 @@ final class UUIDDataConversionTests: XCTestCase {
 
 
     func testThatDataWithIncorrectLengthIsNotConverted() {
-        XCTAssertNil(Data(bytes: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]).toUUID)
-        XCTAssertNil(Data(bytes: [0,1,2]).toUUID)
+        XCTAssertNil(UUID(data: Data(bytes: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17])))
+        XCTAssertNil(UUID(data: Data(bytes: [0,1,2])))
     }
 }
