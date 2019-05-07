@@ -21,36 +21,32 @@ import Foundation
 public extension UUID {
     
     /// return a Data representation of this UUID
-    var uuidData: Data {        
+    var uuidData: Data {
         return withUnsafeBytes(of: uuid, Data.init(bytes:))
     }
-
+    
     
     /// Create an UUID from Data. Fails when Data is not in valid format
     ///
     /// - Parameter data: a data with count = 16.
     init?(data: Data) {
         guard data.count == 16 else { return nil }
-
-        let bytes = data
-
-        let uuidTuple: uuid_t = (bytes[0],
-                                 bytes[1],
-                                 bytes[2],
-                                 bytes[3],
-                                 bytes[4],
-                                 bytes[5],
-                                 bytes[6],
-                                 bytes[7],
-                                 bytes[8],
-                                 bytes[9],
-                                 bytes[10],
-                                 bytes[11],
-                                 bytes[12],
-                                 bytes[13],
-                                 bytes[14],
-                                 bytes[15])
-
-        self.init(uuid: uuidTuple)
+        
+        self.init(uuid: (data[0],
+                         data[1],
+                         data[2],
+                         data[3],
+                         data[4],
+                         data[5],
+                         data[6],
+                         data[7],
+                         data[8],
+                         data[9],
+                         data[10],
+                         data[11],
+                         data[12],
+                         data[13],
+                         data[14],
+                         data[15]))
     }
 }
