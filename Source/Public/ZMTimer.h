@@ -28,6 +28,10 @@
 
 @end
 
+@protocol TearDownCapable
+- (void)tearDown;
+@end
+
 typedef NS_ENUM(NSUInteger, ZMTimerState) {
     ZMTimerStateNotStarted,
     ZMTimerStateStarted,
