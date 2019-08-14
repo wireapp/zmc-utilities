@@ -24,20 +24,19 @@ public enum ExtremeCombiningCharactersValidationError: Error {
 }
 
 public class ExtremeCombiningCharactersValidator: NSObject, ZMPropertyValidator {
-    public static func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>!) throws {
-        guard let pointee = ioValue.pointee else {
-            return
-        }
+    
+    public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
         
-        guard let string = pointee as? String else {
-            fatal("Provided value \(String(describing: ioValue.pointee)) is not a string")
+        guard let string = ioValue as? String else {
+            fatal("Provided value \(String(describing: ioValue)) is not a string")
         }
         
         let stringByRemovingExtremeCombiningCharacters = string.removingExtremeCombiningCharacters
         
         if string.unicodeScalars.count != stringByRemovingExtremeCombiningCharacters.unicodeScalars.count {
-            ioValue.pointee = stringByRemovingExtremeCombiningCharacters as AnyObject?
+            ioValue = stringByRemovingExtremeCombiningCharacters as AnyObject?
             throw ExtremeCombiningCharactersValidationError.containsExtremeCombiningCharacters
         }
+        return true
     }
 }

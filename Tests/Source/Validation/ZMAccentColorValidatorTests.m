@@ -20,7 +20,6 @@
 @import XCTest;
 
 #import "ZMAccentColor.h"
-#import "ZMAccentColorValidator.h"
 
 @interface ZMAccentColorValidatorTests : XCTestCase
 

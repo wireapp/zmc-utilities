@@ -21,7 +21,7 @@ import XCTest
 class StringLengthValidatorTests: XCTestCase {
     func testThatUnicode5EmojiContainsTagsPassesValidation() {
         let originalValue = "🏴󠁧󠁢󠁷󠁬󠁳󠁿"
-        var value: AnyObject? = originalValue as AnyObject?
+        var value: Any? = originalValue as Any?
         var error: Error?
 
         do {

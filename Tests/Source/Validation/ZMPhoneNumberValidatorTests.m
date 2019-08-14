@@ -19,8 +19,6 @@
 
 @import XCTest;
 
-#import "ZMPhoneNumberValidator.h"
-
 @interface ZMPhoneNumberValidatorTests : XCTestCase
 
 @end

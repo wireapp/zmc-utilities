@@ -19,6 +19,7 @@
 
 @import WireTesting;
 @import WireUtilities;
+#import <WireUtilities/WireUtilities.h>
 
 
 static NSString * const usernameValidCharacters = @"ABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&'*+-/=?^_`{|}~abcdefghijklmnopqrstuvwxyz0123456789";
