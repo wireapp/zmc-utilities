@@ -100,8 +100,7 @@ class ZMPhoneNumberValidatorTests: ZMTBaseTest {
             var ioNumber: Any? = number
             
             XCTAssertTrue(try ZMPhoneNumberValidator.validateValue(&ioNumber))
-            XCTAssertEqual(ioNumber as! String, expectedNumber)
-            //XCTAssertEqualObjects(ioNumber, expectedNumber, @"%@ was not normalized to %@ (was %@ instead)", numberToTest, expectedNumber, ioNumber);
+            XCTAssertEqual(ioNumber as! String, expectedNumber, String(format: "%@ was not normalized to %@ (was %@ instead)", number, expectedNumber, ioNumber as! CVarArg))
         }
     }
 }

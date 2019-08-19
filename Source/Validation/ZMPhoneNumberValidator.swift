@@ -41,7 +41,9 @@ public class ZMPhoneNumberValidator: ZMPropertyValidator {
             throw error
         }
         
-        var finalPhoneNumber: Any? = ("+".appending(phoneNumber as String) as NSString).stringByRemovingCharacters("+-. ()")
+        var finalPhoneNumber: Any? = "+".appending((phoneNumber as NSString).stringByRemovingCharacters("+-. ()") as String)
+            
+        
         
         do {
             try StringLengthValidator.validateValue(&finalPhoneNumber,
@@ -56,7 +58,7 @@ public class ZMPhoneNumberValidator: ZMPropertyValidator {
             ioValue = finalPhoneNumber
         }
 
-        return false
+        return true
     }
     
     public static func isValidPhoneNumber(_ phoneNumber: String) -> Bool {
@@ -73,13 +75,13 @@ public class ZMPhoneNumberValidator: ZMPropertyValidator {
 extension NSString {
     
     func stringByRemovingCharacters(_ characters:NSString) -> NSString {
-        let finalString = self
+        var finalString = self
         for i in 0..<characters.length {
             let toRemove = characters.substring(with: NSMakeRange(i, 1))
-            finalString.replacingOccurrences(of: toRemove,
+            finalString = finalString.replacingOccurrences(of: toRemove,
                                              with: "",
                                              options: [],
-                                             range: NSMakeRange(0, finalString.length))
+                                             range: NSMakeRange(0, finalString.length)) as NSString
         }
         return finalString
     }

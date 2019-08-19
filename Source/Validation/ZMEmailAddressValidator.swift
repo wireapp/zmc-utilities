@@ -49,7 +49,9 @@ public class ZMEmailAddressValidator: ZMPropertyValidator {
 
     public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
         
-        guard var emailAddress = ioValue as? NSString? else { return true }
+        if ioValue == nil {
+            return true
+        }
         
         do {
             try StringLengthValidator.validateValue(&ioValue,
@@ -67,6 +69,7 @@ public class ZMEmailAddressValidator: ZMPropertyValidator {
             throw error
         }
         
+        var emailAddress = ioValue as? NSString
         _ = normalizeEmailAddress(&emailAddress)
         
         if emailAddress?.rangeOfCharacter(from: .whitespaces, options: .literal).location != NSNotFound ||
@@ -98,7 +101,7 @@ public class ZMEmailAddressValidator: ZMPropertyValidator {
             validSet.addCharacters(in: "-")
             let invalidSet = validSet.inverted
             
-            let components = domain?.components(separatedBy: ",")
+            let components = domain?.components(separatedBy: ".")
             if components?.count < 2 || components?.last?.hasSuffix("-") == true {
                 try setInvalid()
                 return false
@@ -150,7 +153,7 @@ public class ZMEmailAddressValidator: ZMPropertyValidator {
             ioValue = emailAddress
         }
         
-        return false
+        return true
     }
     
     static func isValidEmailAddress(_ emailAddress: String) -> Bool {
