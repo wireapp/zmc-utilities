@@ -70,7 +70,7 @@ class ZMEmailAddressValidatorTests: ZMTBaseTest {
         var validatedEmails: [String] = []
         
         for email in validEmailAddresses {
-            var validatedEmail: Any? = email
+            var validatedEmail: Any? = email.key
             do {
                 try isValid = ZMEmailAddressValidator.validateValue(&validatedEmail)
             } catch {
