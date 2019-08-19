@@ -1,13 +1,25 @@
 //
-//  ZMEmailAddressValidator.swift
-//  WireUtilities
+// Wire
+// Copyright (C) 2019 Wire Swiss GmbH
 //
-//  Created by Nicola Giancecchi on 09.08.19.
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see http://www.gnu.org/licenses/.
+//
+
 
 import UIKit
 
-class ZMEmailAddressValidator: ZMPropertyValidator {
+public class ZMEmailAddressValidator: ZMPropertyValidator {
     
     static func normalizeEmailAddress(_ emailAddress: inout NSString?) -> Bool {
         var normalizedAddress = emailAddress?.lowercased as NSString?
@@ -35,7 +47,7 @@ class ZMEmailAddressValidator: ZMPropertyValidator {
         return false
     }
 
-    static func validateValue(_ ioValue: inout Any?) throws -> Bool {
+    public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
         
         guard var emailAddress = ioValue as? NSString? else { return true }
         
@@ -143,7 +155,11 @@ class ZMEmailAddressValidator: ZMPropertyValidator {
     
     static func isValidEmailAddress(_ emailAddress: String) -> Bool {
         var emailAddress: Any? = emailAddress
-        return try! validateValue(&emailAddress)
+        do {
+            return try validateValue(&emailAddress)
+        } catch {
+            return false
+        }
     }
     
 }

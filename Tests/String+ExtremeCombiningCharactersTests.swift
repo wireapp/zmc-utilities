@@ -233,12 +233,7 @@ class String_ExtremeCombiningCharactersTests: XCTestCase {
         var string: Any? = .none
         
         // WHEN & THEN
-        do {
-            try ExtremeCombiningCharactersValidator.validateValue(&string)
-        }
-        catch _ {
-            XCTFail()
-        }
+        XCTAssertThrowsError(try ExtremeCombiningCharactersValidator.validateValue(&string))
     }
     
     func testValueValidatorForInvalidString() {

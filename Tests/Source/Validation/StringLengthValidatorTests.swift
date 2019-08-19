@@ -34,4 +34,120 @@ class StringLengthValidatorTests: XCTestCase {
         XCTAssertNil(error)
         XCTAssertEqual(originalValue, value! as! String)
     }
+    
+    func testThatTooShortStringsDoNotPassValidation() {
+        var value: Any? = "short"
+        do {
+            try StringLengthValidator.validateValue(&value,
+                                                             minimumStringLength: 15,
+                                                             maximumStringLength: 100,
+                                                             maximumByteLength: 100)
+        } catch {
+            XCTAssertNotNil(error)
+        }
+    }
+    
+    func testThatTooLongStringsDoNotPassValidation() {
+        var value: Any? = "long"
+        do {
+            try StringLengthValidator.validateValue(&value,
+                                                    minimumStringLength: 1,
+                                                    maximumStringLength: 3,
+                                                    maximumByteLength: 100)
+        } catch {
+            XCTAssertNotNil(error)
+        }
+    }
+    
+    func testThatValidStringsPassValidation() {
+        var value: Any? = "normal"
+        do {
+            try StringLengthValidator.validateValue(&value,
+                                                    minimumStringLength: 1,
+                                                    maximumStringLength: 10,
+                                                    maximumByteLength: 100)
+        } catch {
+            XCTAssertNil(error)
+        }
+        //XCTAssertTrue REsult
+    }
+    
+    func testThatCombinedEmojiPassesValidation_3() {
+        let originalValue: Any? = "👨‍👧‍👦"
+        var value = originalValue
+        
+        do {
+            try StringLengthValidator.validateValue(&value,
+                                                    minimumStringLength: 1,
+                                                    maximumStringLength: 64,
+                                                    maximumByteLength: 100)
+        } catch {
+            XCTAssertNil(error)
+        }
+        //XCTAssertTrue REsult
+        XCTAssertEqual(originalValue as! String, value as! String)
+    }
+    
+    func testThatCombinedEmojiPassesValidation_4() {
+        let originalValue: Any? = "👩‍👩‍👦‍👦"
+        var value = originalValue
+        
+        do {
+            try StringLengthValidator.validateValue(&value,
+                                                    minimumStringLength: 1,
+                                                    maximumStringLength: 64,
+                                                    maximumByteLength: 100)
+        } catch {
+            XCTAssertNil(error)
+        }
+        //XCTAssertTrue REsult
+        XCTAssertEqual(originalValue as! String, value as! String)
+    }
+    
+    func testThatItRemovesControlCharactersBetweenCombinedEmoji() {
+        let originalValue: Any? = "👩‍👩‍👦‍👦/n👨‍👧‍👦"
+        var value = originalValue
+        
+        do {
+            try StringLengthValidator.validateValue(&value,
+                                                    minimumStringLength: 1,
+                                                    maximumStringLength: 64,
+                                                    maximumByteLength: 100)
+        } catch {
+            XCTAssertNil(error)
+        }
+        //XCTAssertTrue REsult
+        XCTAssertEqual(originalValue as! String, value as! String)
+    }
+    
+    func testThatNilIsNotValid() {
+        
+        var value: Any? = nil
+        
+        do {
+            try StringLengthValidator.validateValue(&value,
+                                                    minimumStringLength: 1,
+                                                    maximumStringLength: 10,
+                                                    maximumByteLength: 100)
+        } catch {
+            XCTAssertNotNil(error)
+        }
+        //XCTAssertFalse REsult
+    }
+    
+    func testThatItReplacesNewlinesAndTabWithSpacesInThePhoneNumber() {
+        
+        var phoneNumber: Any? = "1234\n5678"
+        
+        do {
+            try StringLengthValidator.validateValue(&phoneNumber,
+                                                    minimumStringLength: 0,
+                                                    maximumStringLength: 20,
+                                                    maximumByteLength: 100)
+        } catch {
+            XCTAssertNil(error)
+        }
+        XCTAssertEqual(phoneNumber as! String, "1234 5678")
+    }
+    
 }

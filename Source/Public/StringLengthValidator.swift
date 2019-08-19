@@ -40,7 +40,7 @@ import Foundation
     static public func validateValue(_ ioValue: inout Any?,
                                      minimumStringLength: UInt32,
                                      maximumStringLength: UInt32,
-                                     maximumByteLength: UInt32) throws {
+                                     maximumByteLength: UInt32) throws -> Bool {
         guard let string = ioValue as? String else {
             throw StringLengthError.tooShort
         }
@@ -68,6 +68,8 @@ import Foundation
         if string != trimmedString {
             ioValue = trimmedString
         }
+        
+        return false
     }
     
 }

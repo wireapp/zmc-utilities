@@ -21,6 +21,7 @@ import WireSystem
 
 public enum ExtremeCombiningCharactersValidationError: Error {
     case containsExtremeCombiningCharacters
+    case notAString
 }
 
 public class ExtremeCombiningCharactersValidator: NSObject, ZMPropertyValidator {
@@ -28,7 +29,7 @@ public class ExtremeCombiningCharactersValidator: NSObject, ZMPropertyValidator 
     public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
         
         guard let string = ioValue as? String else {
-            fatal("Provided value \(String(describing: ioValue)) is not a string")
+            throw ExtremeCombiningCharactersValidationError.notAString
         }
         
         let stringByRemovingExtremeCombiningCharacters = string.removingExtremeCombiningCharacters
