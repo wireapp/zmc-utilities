@@ -19,7 +19,7 @@
 
 import UIKit
 
-public class ZMEmailAddressValidator: ZMPropertyValidator {
+@objc public class ZMEmailAddressValidator: NSObject, ZMPropertyValidator {
     
     static func normalizeEmailAddress(_ emailAddress: inout NSString?) -> Bool {
         var normalizedAddress = emailAddress?.lowercased as NSString?

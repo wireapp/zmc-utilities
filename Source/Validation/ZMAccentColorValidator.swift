@@ -19,7 +19,7 @@
 
 import UIKit
 
-public class ZMAccentColorValidator: ZMPropertyValidator {
+@objc public class ZMAccentColorValidator: NSObject, ZMPropertyValidator {
 
     public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
         

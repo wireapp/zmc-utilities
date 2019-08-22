@@ -19,7 +19,7 @@
 
 import UIKit
 
-public class ZMPhoneNumberValidator: ZMPropertyValidator {
+@objc public class ZMPhoneNumberValidator: NSObject, ZMPropertyValidator {
 
     public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
         
