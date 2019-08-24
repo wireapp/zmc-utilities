@@ -46,12 +46,12 @@ import UIKit
         
         
         do {
-            try StringLengthValidator.validateValue(&finalPhoneNumber,
+            _ = try StringLengthValidator.validateValue(&finalPhoneNumber,
                                                 minimumStringLength: 9,
                                                 maximumStringLength: 24,
                                                 maximumByteLength: 24)
-        } catch {
-            return false
+        } catch let error {
+            throw error
         }
         
         if finalPhoneNumber as! NSString != phoneNumber {

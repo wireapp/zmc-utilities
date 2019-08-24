@@ -69,7 +69,7 @@ import Foundation
             ioValue = trimmedString
         }
         
-        return false
+        return true
     }
     
 }
