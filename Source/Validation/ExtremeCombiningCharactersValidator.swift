@@ -26,7 +26,14 @@ public enum ExtremeCombiningCharactersValidationError: Error {
 
 public class ExtremeCombiningCharactersValidator: NSObject, ZMPropertyValidator {
     
-    public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
+    @objc(validateValue:error:)
+    public static func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>!) throws {
+        var pointee = ioValue.pointee as Any?
+        try validateValue(&pointee)
+        ioValue.pointee = pointee as AnyObject?
+    }
+    
+    @discardableResult public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
         
         guard let string = ioValue as? String else {
             throw ExtremeCombiningCharactersValidationError.notAString

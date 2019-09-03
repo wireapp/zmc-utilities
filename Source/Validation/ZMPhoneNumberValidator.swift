@@ -21,7 +21,14 @@ import UIKit
 
 @objc public class ZMPhoneNumberValidator: NSObject, ZMPropertyValidator {
 
-    public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
+    @objc(validateValue:error:)
+    public static func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>!) throws {
+        var pointee = ioValue.pointee as Any?
+        try validateValue(&pointee)
+        ioValue.pointee = pointee as AnyObject?
+    }
+    
+    @discardableResult public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
         
         guard let phoneNumber = ioValue as? NSString,
             phoneNumber.length >= 1 else {
@@ -61,6 +68,7 @@ import UIKit
         return true
     }
     
+    @objc(isValidPhoneNumber:)
     public static func isValidPhoneNumber(_ phoneNumber: String) -> Bool {
         var phoneNumber: Any? = phoneNumber
         do {

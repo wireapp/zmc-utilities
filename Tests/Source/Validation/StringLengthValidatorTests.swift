@@ -21,7 +21,7 @@ import XCTest
 class StringLengthValidatorTests: XCTestCase {
     func testThatUnicode5EmojiContainsTagsPassesValidation() {
         let originalValue = "🏴󠁧󠁢󠁷󠁬󠁳󠁿"
-        var value: Any? = originalValue as Any?
+        var value: AnyObject? = originalValue as AnyObject?
         var error: Error?
 
         do {
@@ -36,7 +36,7 @@ class StringLengthValidatorTests: XCTestCase {
     }
     
     func testThatTooShortStringsDoNotPassValidation() {
-        var value: Any? = "short"
+        var value: AnyObject? = "short" as AnyObject
         do {
             try StringLengthValidator.validateValue(&value,
                                                              minimumStringLength: 15,
@@ -48,7 +48,7 @@ class StringLengthValidatorTests: XCTestCase {
     }
     
     func testThatTooLongStringsDoNotPassValidation() {
-        var value: Any? = "long"
+        var value: AnyObject? = "long" as AnyObject
         do {
             try StringLengthValidator.validateValue(&value,
                                                     minimumStringLength: 1,
@@ -60,7 +60,7 @@ class StringLengthValidatorTests: XCTestCase {
     }
     
     func testThatValidStringsPassValidation() {
-        var value: Any? = "normal"
+        var value: AnyObject? = "normal" as AnyObject
         do {
             try StringLengthValidator.validateValue(&value,
                                                     minimumStringLength: 1,
@@ -73,7 +73,7 @@ class StringLengthValidatorTests: XCTestCase {
     }
     
     func testThatCombinedEmojiPassesValidation_3() {
-        let originalValue: Any? = "👨‍👧‍👦"
+        let originalValue: AnyObject? = "👨‍👧‍👦" as AnyObject
         var value = originalValue
         
         do {
@@ -89,7 +89,7 @@ class StringLengthValidatorTests: XCTestCase {
     }
     
     func testThatCombinedEmojiPassesValidation_4() {
-        let originalValue: Any? = "👩‍👩‍👦‍👦"
+        let originalValue: AnyObject? = "👩‍👩‍👦‍👦" as AnyObject
         var value = originalValue
         
         do {
@@ -105,7 +105,7 @@ class StringLengthValidatorTests: XCTestCase {
     }
     
     func testThatItRemovesControlCharactersBetweenCombinedEmoji() {
-        let originalValue: Any? = "👩‍👩‍👦‍👦/n👨‍👧‍👦"
+        let originalValue: AnyObject? = "👩‍👩‍👦‍👦/n👨‍👧‍👦" as AnyObject
         var value = originalValue
         
         do {
@@ -122,7 +122,7 @@ class StringLengthValidatorTests: XCTestCase {
     
     func testThatNilIsNotValid() {
         
-        var value: Any? = nil
+        var value: AnyObject? = nil
         
         do {
             try StringLengthValidator.validateValue(&value,
@@ -137,7 +137,7 @@ class StringLengthValidatorTests: XCTestCase {
     
     func testThatItReplacesNewlinesAndTabWithSpacesInThePhoneNumber() {
         
-        var phoneNumber: Any? = "1234\n5678"
+        var phoneNumber: AnyObject? = "1234\n5678" as AnyObject
         
         do {
             try StringLengthValidator.validateValue(&phoneNumber,

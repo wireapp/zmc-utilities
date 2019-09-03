@@ -47,7 +47,14 @@ import UIKit
         return false
     }
 
-    public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
+    @objc(validateValue:error:)
+    public static func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>!) throws {
+        var pointee = ioValue.pointee as Any?
+        try validateValue(&pointee)
+        ioValue.pointee = pointee as AnyObject?
+    }
+    
+    @discardableResult public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
         
         if ioValue == nil {
             return true
@@ -156,7 +163,8 @@ import UIKit
         return true
     }
     
-    static func isValidEmailAddress(_ emailAddress: String) -> Bool {
+    @objc(isValidEmailAddress:)
+    public static func isValidEmailAddress(_ emailAddress: String) -> Bool {
         var emailAddress: Any? = emailAddress
         do {
             return try validateValue(&emailAddress)

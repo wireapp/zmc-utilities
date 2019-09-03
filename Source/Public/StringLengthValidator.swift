@@ -37,7 +37,17 @@ import Foundation
                                                userInfo: nil)
     }
     
-    static public func validateValue(_ ioValue: inout Any?,
+    @objc(validateValue:minimumStringLength:maximumStringLength:maximumByteLength:error:)
+    public static func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>!,
+                                     minimumStringLength: UInt32,
+                                     maximumStringLength: UInt32,
+                                     maximumByteLength: UInt32) throws {
+        var pointee = ioValue.pointee as Any?
+        try validateValue(&pointee, minimumStringLength: minimumStringLength, maximumStringLength: maximumStringLength, maximumByteLength: maximumByteLength)
+        ioValue.pointee = pointee as AnyObject?
+    }
+    
+    @discardableResult static public func validateValue(_ ioValue: inout Any?,
                                      minimumStringLength: UInt32,
                                      maximumStringLength: UInt32,
                                      maximumByteLength: UInt32) throws -> Bool {
