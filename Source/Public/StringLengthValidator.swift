@@ -43,11 +43,11 @@ import Foundation
                                      maximumStringLength: UInt32,
                                      maximumByteLength: UInt32) throws {
         var pointee = ioValue.pointee as Any?
-        try validateValue(&pointee, minimumStringLength: minimumStringLength, maximumStringLength: maximumStringLength, maximumByteLength: maximumByteLength)
-        ioValue.pointee = pointee as AnyObject?
+        defer { ioValue.pointee = pointee as AnyObject? }
+        try validateStringValue(&pointee, minimumStringLength: minimumStringLength, maximumStringLength: maximumStringLength, maximumByteLength: maximumByteLength)
     }
     
-    @discardableResult static public func validateValue(_ ioValue: inout Any?,
+    @discardableResult static public func validateStringValue(_ ioValue: inout Any?,
                                      minimumStringLength: UInt32,
                                      maximumStringLength: UInt32,
                                      maximumByteLength: UInt32) throws -> Bool {

@@ -50,8 +50,8 @@ import UIKit
     @objc(validateValue:error:)
     public static func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>!) throws {
         var pointee = ioValue.pointee as Any?
+        defer { ioValue.pointee = pointee as AnyObject? }
         try validateValue(&pointee)
-        ioValue.pointee = pointee as AnyObject?
     }
     
     @discardableResult public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
@@ -60,21 +60,23 @@ import UIKit
             return true
         }
         
-        do {
-            try StringLengthValidator.validateValue(&ioValue,
-                                                    minimumStringLength: 0,
-                                                    maximumStringLength: 120,
-                                                    maximumByteLength: 120)
-        } catch {
-            return false
-        }
-        
         let setInvalid = {
             let description = "The email address is invalid."
             let userInfo = [NSLocalizedDescriptionKey: description]
             let error = NSError(domain: ZMObjectValidationErrorDomain, code: ZMManagedObjectValidationErrorCode.emailAddressIsInvalid.rawValue, userInfo: userInfo)
             throw error
         }
+        
+        do {
+            try StringLengthValidator.validateStringValue(&ioValue,
+                                                    minimumStringLength: 0,
+                                                    maximumStringLength: 120,
+                                                    maximumByteLength: 120)
+        } catch {
+            try setInvalid()
+            return false
+        }
+        
         
         var emailAddress = ioValue as? NSString
         _ = normalizeEmailAddress(&emailAddress)

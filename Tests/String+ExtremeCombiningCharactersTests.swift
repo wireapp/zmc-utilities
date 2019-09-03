@@ -214,7 +214,7 @@ class String_ExtremeCombiningCharactersTests: XCTestCase {
     func testValueValidatorForValidString() {
         // GIVEN 
         let initialString = "Hello world"
-        var string: Any? = initialString as Any?
+        var string: AnyObject? = initialString as AnyObject?
         
         // WHEN
         do {
@@ -230,7 +230,7 @@ class String_ExtremeCombiningCharactersTests: XCTestCase {
     
     func testValueValidatorForNilString() {
         // GIVEN
-        var string: Any? = .none
+        var string: AnyObject? = .none as AnyObject?
         
         // WHEN & THEN
         XCTAssertThrowsError(try ExtremeCombiningCharactersValidator.validateValue(&string))
@@ -239,7 +239,7 @@ class String_ExtremeCombiningCharactersTests: XCTestCase {
     func testValueValidatorForInvalidString() {
         // GIVEN
         let initialString = "ť̹̱͉̥̬̪̝ͭ͗͊̕e͇̺̳̦̫̣͕ͫͤ̅s͇͎̟͈̮͎̊̾̌͛ͭ́͜t̗̻̟̙͑ͮ͊ͫ̂"
-        var string: Any? = initialString as AnyObject?
+        var string: AnyObject? = initialString as AnyObject?
         
         var thrownError: Error?
         

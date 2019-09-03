@@ -24,8 +24,8 @@ import UIKit
     @objc(validateValue:error:)
     public static func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>!) throws {
         var pointee = ioValue.pointee as Any?
+        defer { ioValue.pointee = pointee as AnyObject? }
         try validateValue(&pointee)
-        ioValue.pointee = pointee as AnyObject?
     }
     
     

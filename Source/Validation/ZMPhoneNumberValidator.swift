@@ -24,8 +24,8 @@ import UIKit
     @objc(validateValue:error:)
     public static func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>!) throws {
         var pointee = ioValue.pointee as Any?
+        defer { ioValue.pointee = pointee as AnyObject? }
         try validateValue(&pointee)
-        ioValue.pointee = pointee as AnyObject?
     }
     
     @discardableResult public static func validateValue(_ ioValue: inout Any?) throws -> Bool {
@@ -53,7 +53,7 @@ import UIKit
         
         
         do {
-            _ = try StringLengthValidator.validateValue(&finalPhoneNumber,
+            _ = try StringLengthValidator.validateStringValue(&finalPhoneNumber,
                                                 minimumStringLength: 9,
                                                 maximumStringLength: 24,
                                                 maximumByteLength: 24)

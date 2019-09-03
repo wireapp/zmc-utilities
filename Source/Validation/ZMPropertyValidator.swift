@@ -30,5 +30,4 @@ public let ZMObjectValidationErrorDomain = "ZMManagedObjectValidation"
 
 public protocol ZMPropertyValidator {
     static func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>!) throws
-    static func validateValue(_ ioValue: inout Any?) throws -> Bool
 }
