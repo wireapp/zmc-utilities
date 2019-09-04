@@ -230,10 +230,15 @@ class String_ExtremeCombiningCharactersTests: XCTestCase {
     
     func testValueValidatorForNilString() {
         // GIVEN
-        var string: AnyObject? = .none as AnyObject?
+        var string: AnyObject? = .none
         
         // WHEN & THEN
-        XCTAssertThrowsError(try ExtremeCombiningCharactersValidator.validateValue(&string))
+        do {
+            try ExtremeCombiningCharactersValidator.validateValue(&string)
+        }
+        catch _ {
+            XCTFail()
+        }
     }
     
     func testValueValidatorForInvalidString() {
