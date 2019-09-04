@@ -29,7 +29,7 @@ public enum ExtremeCombiningCharactersValidationError: Error {
     @objc(validateValue:error:)
     public static func validateValue(_ ioValue: AutoreleasingUnsafeMutablePointer<AnyObject?>!) throws {
         guard let pointee = ioValue.pointee else {
-            return
+            throw ExtremeCombiningCharactersValidationError.notAString
         }
         
         var anyPointee: Any? = pointee as Any?
