@@ -78,6 +78,13 @@ import UIKit
         }
     }
     
+    @objc(validatePhoneNumber:)
+    public static func validate(phoneNumber: String) -> String? {
+        var phoneNumber: Any? = phoneNumber
+        try? validateValue(&phoneNumber)
+        return phoneNumber as? String
+    }
+    
 }
 
 extension NSString {
