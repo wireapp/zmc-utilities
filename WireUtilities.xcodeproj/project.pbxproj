@@ -118,6 +118,7 @@
 		877F50211E729CCF00894C90 /* excessive_diacritics.txt in Resources */ = {isa = PBXBuildFile; fileRef = 877F50201E729CCF00894C90 /* excessive_diacritics.txt */; };
 		87B6489C2076078A002FC9E7 /* Composition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B6489B2076078A002FC9E7 /* Composition.swift */; };
 		87ECBDD51E78457C00596836 /* ExtremeCombiningCharactersValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ECBDD41E78457C00596836 /* ExtremeCombiningCharactersValidator.swift */; };
+		A9CDCDC2237D9928008A9BC6 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CDCDC1237D9927008A9BC6 /* UIColor+Hex.swift */; };
 		BF3493F41EC362D400B0C314 /* Iterator+Containment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3493F31EC362D400B0C314 /* Iterator+Containment.swift */; };
 		BF3493F61EC36A6400B0C314 /* Iterator+ContainmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3493F51EC36A6400B0C314 /* Iterator+ContainmentTests.swift */; };
 		BF3A7A601D8AA9B30034FF40 /* OptionalComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3A7A5F1D8AA9B30034FF40 /* OptionalComparison.swift */; };
@@ -359,6 +360,7 @@
 		877F50201E729CCF00894C90 /* excessive_diacritics.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = excessive_diacritics.txt; sourceTree = "<group>"; };
 		87B6489B2076078A002FC9E7 /* Composition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Composition.swift; sourceTree = "<group>"; };
 		87ECBDD41E78457C00596836 /* ExtremeCombiningCharactersValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtremeCombiningCharactersValidator.swift; sourceTree = "<group>"; };
+		A9CDCDC1237D9927008A9BC6 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Hex.swift"; path = "Source/Public/UIColor+Hex.swift"; sourceTree = SOURCE_ROOT; };
 		BF3493F31EC362D400B0C314 /* Iterator+Containment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Iterator+Containment.swift"; sourceTree = "<group>"; };
 		BF3493F51EC36A6400B0C314 /* Iterator+ContainmentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Iterator+ContainmentTests.swift"; sourceTree = "<group>"; };
 		BF3A7A5F1D8AA9B30034FF40 /* OptionalComparison.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalComparison.swift; sourceTree = "<group>"; };
@@ -640,6 +642,7 @@
 		54CA31141B74F2C400B820C0 /* Public */ = {
 			isa = PBXGroup;
 			children = (
+				A9CDCDBE237D98BF008A9BC6 /* UIColor */,
 				EF18C7D11F9E37CA0085A832 /* String+Filename.swift */,
 				F15BDB1D20889772002F36E8 /* TearDownCapable.swift */,
 				BF3C1B0C20DA7270001CE126 /* Equatable+OneOf.swift */,
@@ -703,6 +706,14 @@
 				5E39FC58225B55F200C682B8 /* PasswordValidationResult.swift */,
 			);
 			path = Password;
+			sourceTree = "<group>";
+		};
+		A9CDCDBE237D98BF008A9BC6 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				A9CDCDC1237D9927008A9BC6 /* UIColor+Hex.swift */,
+			);
+			path = UIColor;
 			sourceTree = "<group>";
 		};
 		F9C9A79F1CAEACB10039E10C /* Validation */ = {
@@ -1072,6 +1083,7 @@
 				16EB9B361CE0D5A000883FCF /* UTType.swift in Sources */,
 				870FFA821D82B73B007E9806 /* Data+ZMSCrypto.swift in Sources */,
 				D53DB99F203ED59C00655CB4 /* Result.swift in Sources */,
+				A9CDCDC2237D9928008A9BC6 /* UIColor+Hex.swift in Sources */,
 				8735AE6F2035E3BC00DCE66E /* StringLengthValidator.swift in Sources */,
 				F9479C751E4A2D0F0039F55F /* NSOrderedSet.swift in Sources */,
 				EE1E354221E7739400F1144B /* DarwinNotificationCenter.swift in Sources */,
