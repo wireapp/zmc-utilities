@@ -78,6 +78,12 @@ public extension URL {
         }
     }
     
+    func excludeFromBackupIfExists() throws {
+        if FileManager.default.fileExists(atPath: path) {
+            try excludeFromBackup()
+        }
+    }
+
     /// Returns whether the item is excluded from backups
     var isExcludedFromBackup : Bool {
         guard let values = try? resourceValues(forKeys: Set(arrayLiteral: .isExcludedFromBackupKey)) else { return false }
