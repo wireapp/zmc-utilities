@@ -34,7 +34,6 @@ final class UnownedNSObjectTests: XCTestCase {
         let unownedObject = UnownedNSObject(array![0] as NSObject)
         array = nil
         XCTAssertFalse(unownedObject.isValid)
-        XCTAssertNil(unownedObject.unbox)
+        XCTAssertNil(unownedObject.unbox, "unownedObject.unbox = \(String(describing: unownedObject.unbox))")
     }
-
 }
