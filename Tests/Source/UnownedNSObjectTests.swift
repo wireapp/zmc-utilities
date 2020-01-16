@@ -29,7 +29,7 @@ final class UnownedNSObjectTests: XCTestCase {
     }
     
     
-    func testThatUnownedNSObjectIsInvalidIfValueDoesNotExistAnymore() {
+    func testThatUnownedNSObjectIsInvalidIfObjectDoesNotExistAnymore() {
         var array : Array<NSObject>? = [NSObject()]
         let unownedObject = UnownedNSObject(array![0] as NSObject)
         array = nil
