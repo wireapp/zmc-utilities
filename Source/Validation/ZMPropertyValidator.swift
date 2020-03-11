@@ -19,8 +19,6 @@
 
 import Foundation
 
-public let ZMObjectValidationErrorDomain = "ZMManagedObjectValidation"
-
 @objc public enum ZMManagedObjectValidationErrorCode: Int, Error {
     case tooLong
     case tooShort
