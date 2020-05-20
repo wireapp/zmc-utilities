@@ -156,6 +156,7 @@
 		D5D65A13207631A100D7F3C3 /* NSManagedObjectContext+PerformGrouped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D65A12207631A100D7F3C3 /* NSManagedObjectContext+PerformGrouped.swift */; };
 		EE1E354221E7739400F1144B /* DarwinNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E354121E7739400F1144B /* DarwinNotificationCenter.swift */; };
 		EE1E357421E796F100F1144B /* DarwinNotificationCenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E357321E796F100F1144B /* DarwinNotificationCenterTests.swift */; };
+		EE71ED2124755D31002D76C0 /* FeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE71ED2024755D31002D76C0 /* FeatureFlags.swift */; };
 		EECE48C71FFBE45D0015BAE8 /* FixedWidthInteger_RandomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE48C61FFBE45D0015BAE8 /* FixedWidthInteger_RandomTests.swift */; };
 		EECE92301FFBC5540096387F /* FixedWidthInteger+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE922F1FFBC5540096387F /* FixedWidthInteger+Random.swift */; };
 		EF18C7D21F9E37CA0085A832 /* String+Filename.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF18C7D11F9E37CA0085A832 /* String+Filename.swift */; };
@@ -403,6 +404,7 @@
 		D5D65A12207631A100D7F3C3 /* NSManagedObjectContext+PerformGrouped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+PerformGrouped.swift"; sourceTree = "<group>"; };
 		EE1E354121E7739400F1144B /* DarwinNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarwinNotificationCenter.swift; sourceTree = "<group>"; };
 		EE1E357321E796F100F1144B /* DarwinNotificationCenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarwinNotificationCenterTests.swift; sourceTree = "<group>"; };
+		EE71ED2024755D31002D76C0 /* FeatureFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlags.swift; sourceTree = "<group>"; };
 		EECE48C61FFBE45D0015BAE8 /* FixedWidthInteger_RandomTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedWidthInteger_RandomTests.swift; sourceTree = "<group>"; };
 		EECE922F1FFBC5540096387F /* FixedWidthInteger+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FixedWidthInteger+Random.swift"; sourceTree = "<group>"; };
 		EF18C7D11F9E37CA0085A832 /* String+Filename.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Filename.swift"; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 				16B75F65222EDC5000DCAFF2 /* String+Stripping.swift */,
 				5E9EA4C022423E0300D401B2 /* Array+SafeIndex.swift */,
 				5E39FC53225B37EC00C682B8 /* Password */,
+				EE71ED2024755D31002D76C0 /* FeatureFlags.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1046,6 +1049,7 @@
 				16030DC021AEA0FE00F8032E /* Array+PartitionByKeyPath.swift in Sources */,
 				54CA31551B74F7D400B820C0 /* NSManagedObjectContext+WireUtilities.m in Sources */,
 				7C8BFFE122FC612900B3C8A5 /* ZMPropertyValidator.swift in Sources */,
+				EE71ED2124755D31002D76C0 /* FeatureFlags.swift in Sources */,
 				3E88BF6B1B1F693F00232589 /* NSData+ZMAdditions.m in Sources */,
 				54C388A81C4D5A3B00A55C79 /* NSUUID+Type1.swift in Sources */,
 				EF2AFC9D228176C3008C921A /* UUID+Data.swift in Sources */,
