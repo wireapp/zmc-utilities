@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		060ED6D42499F35200412C4A /* UUID+Compare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060ED6D32499F35200412C4A /* UUID+Compare.swift */; };
 		097E36C31B7B62150039CC4C /* NSLocale+Internal.m in Sources */ = {isa = PBXBuildFile; fileRef = 097E36C21B7B62150039CC4C /* NSLocale+Internal.m */; };
 		097E36C51B7B631C0039CC4C /* NSLocale+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 097E36C41B7B631C0039CC4C /* NSLocale+Internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		09F027CB1B721D7300BADDB6 /* NSUserDefaults+SharedUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F027C81B721D7300BADDB6 /* NSUserDefaults+SharedUserDefaults.m */; };
@@ -244,7 +243,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		060ED6D32499F35200412C4A /* UUID+Compare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UUID+Compare.swift"; sourceTree = "<group>"; };
 		097E36C21B7B62150039CC4C /* NSLocale+Internal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLocale+Internal.m"; sourceTree = "<group>"; };
 		097E36C41B7B631C0039CC4C /* NSLocale+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLocale+Internal.h"; sourceTree = "<group>"; };
 		09F027C81B721D7300BADDB6 /* NSUserDefaults+SharedUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+SharedUserDefaults.m"; sourceTree = "<group>"; };
@@ -710,7 +708,6 @@
 				8735AE6E2035E3BC00DCE66E /* StringLengthValidator.swift */,
 				5E0A1FF82105DBBA00949B3E /* Map+KeyPath.swift */,
 				EF2AFC9C228176C3008C921A /* UUID+Data.swift */,
-				060ED6D32499F35200412C4A /* UUID+Compare.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -1045,7 +1042,6 @@
 			files = (
 				D504CD332090C2F200A78DAA /* Curry.swift in Sources */,
 				877F501D1E719B2B00894C90 /* String+ExtremeCombiningCharacters.swift in Sources */,
-				060ED6D42499F35200412C4A /* UUID+Compare.swift in Sources */,
 				3E88BE411B1F478200232589 /* ZMFunctional.m in Sources */,
 				16030DC021AEA0FE00F8032E /* Array+PartitionByKeyPath.swift in Sources */,
 				54CA31551B74F7D400B820C0 /* NSManagedObjectContext+WireUtilities.m in Sources */,

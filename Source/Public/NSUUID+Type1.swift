@@ -95,6 +95,13 @@ public extension NSUUID {
 
 
 public extension UUID {
+    /// Returns the comparison result for this NSUUID of type 1 and another NSUUID of type 1
+    /// - Requires: will assert if any UUID is not of type 1
+    func compare(withType1UUID type1UUID: UUID) -> ComparisonResult {
+        assert(self.isType1UUID && type1UUID.isType1UUID)
+        return self.type1Timestamp!.compare(type1UUID.type1Timestamp!)
+    }
+    
     var isType1UUID : Bool {
         return (self as NSUUID).isType1UUID
     }
@@ -109,6 +116,10 @@ public extension UUID {
     
     func compare(withType1UUID type1UUID: NSUUID) -> ComparisonResult {
         return (self as NSUUID).compare(withType1UUID: type1UUID)
+    }
+    
+    func compare(withType1 uuid: UUID) -> ComparisonResult {
+        return self.compare(withType1UUID: uuid)
     }
     
     static func timeBasedUUID() -> NSUUID {
