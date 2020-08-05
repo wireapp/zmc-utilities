@@ -22,7 +22,7 @@ import LocalAuthentication
 
 public protocol KeychainItem {
     func queryForSetting<T>(value: T) -> [CFString: Any]
-    var queryForGettingValue: [CFString: Any] { get set }
+    var queryForGettingValue: [CFString: Any] { get }
 }
 
 public enum Keychain {
