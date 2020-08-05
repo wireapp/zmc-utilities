@@ -21,7 +21,8 @@ import Security
 import LocalAuthentication
 
 public protocol KeychainItem {
-    func queryForSetting<T>(value: T) -> [CFString: Any]
+    associatedtype Value
+    func queryForSetting(value: Value) -> [CFString: Any]
     var queryForGettingValue: [CFString: Any] { get }
 }
 
@@ -29,13 +30,13 @@ public enum Keychain {
 
     public enum KeychainError: Error {
         case failedToStoreItemInKeychain(OSStatus)
-        case failedToFetchItemFromKeychain(OSStatus)
+        case failedToFetchItemFromKeychain(OSStatus?)
         case failedToDeleteItemFromKeychain(OSStatus)
     }
 
     // MARK: - Keychain access
 
-    public static func storeItem<T>(_ item: KeychainItem, value: T) throws {
+    public static func storeItem<T: KeychainItem>(_ item: T, value: T.Value) throws {
         let query = item.queryForSetting(value: value) as CFDictionary
         let status = SecItemAdd(query, nil)
 
@@ -44,7 +45,7 @@ public enum Keychain {
         }
     }
 
-    public static func fetchItem<T>(_ item: KeychainItem) throws -> T {
+    public static func fetchItem<T: KeychainItem>(_ item: T) throws -> T.Value {
         var value: CFTypeRef?
         let status = SecItemCopyMatching(item.queryForGettingValue as CFDictionary, &value)
 
@@ -52,10 +53,14 @@ public enum Keychain {
             throw KeychainError.failedToFetchItemFromKeychain(status)
         }
 
-        return value as! T
+        guard let valueCasted = value as? T.Value else {
+            throw KeychainError.failedToFetchItemFromKeychain(nil)
+        }
+
+        return valueCasted
     }
 
-    public static func deleteItem(_ item: KeychainItem) throws {
+    public static func deleteItem<T: KeychainItem>(_ item: T) throws {
         let status = SecItemDelete(item.queryForGettingValue as CFDictionary)
 
         guard status == errSecSuccess || status == errSecItemNotFound else {
@@ -63,7 +68,7 @@ public enum Keychain {
         }
     }
 
-    public static func updateItem<T>(_ item: KeychainItem, value: T) throws {
+    public static func updateItem<T: KeychainItem>(_ item: T, value: T.Value) throws {
         try deleteItem(item)
         try storeItem(item, value: value)
     }
