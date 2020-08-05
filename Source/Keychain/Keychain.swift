@@ -20,50 +20,49 @@ import Foundation
 import Security
 import LocalAuthentication
 
-
 public protocol KeychainItem {
-    func setQuery<T>(value: T) -> [CFString: Any]
-    var getQuery: [CFString: Any] { get }
+    func queryForSetting<T>(value: T) -> [CFString: Any]
+    var queryForGettingValue: [CFString: Any] { get set }
 }
 
 public enum Keychain {
-        
+
     public enum KeychainError: Error {
         case failedToStoreItemInKeychain(OSStatus)
         case failedToFetchItemFromKeychain(OSStatus)
         case failedToDeleteItemFromKeychain(OSStatus)
     }
-    
+
     // MARK: - Keychain access
 
     public static func storeItem<T>(_ item: KeychainItem, value: T) throws {
-        let query = item.setQuery(value: value) as CFDictionary
+        let query = item.queryForSetting(value: value) as CFDictionary
         let status = SecItemAdd(query, nil)
-        
+
         guard status == errSecSuccess else {
             throw KeychainError.failedToStoreItemInKeychain(status)
         }
     }
-    
+
     public static func fetchItem<T>(_ item: KeychainItem) throws -> T {
-        var value: CFTypeRef? = nil
-        let status = SecItemCopyMatching(item.getQuery as CFDictionary, &value)
-        
+        var value: CFTypeRef?
+        let status = SecItemCopyMatching(item.queryForGettingValue as CFDictionary, &value)
+
         guard status == errSecSuccess else {
             throw KeychainError.failedToFetchItemFromKeychain(status)
         }
-                
+
         return value as! T
     }
-    
+
     public static func deleteItem(_ item: KeychainItem) throws {
-        let status = SecItemDelete(item.getQuery as CFDictionary)
-        
+        let status = SecItemDelete(item.queryForGettingValue as CFDictionary)
+
         guard status == errSecSuccess || status == errSecItemNotFound else {
             throw KeychainError.failedToDeleteItemFromKeychain(status)
         }
     }
-    
+
     public static func updateItem<T>(_ item: KeychainItem, value: T) throws {
         try deleteItem(item)
         try storeItem(item, value: value)
