@@ -20,46 +20,13 @@ import Foundation
 import Security
 import LocalAuthentication
 
-public enum PasscodeKeychainItem: KeychainItemType {
-    case passcode
-    
-    var uniqueIdentifier: String {
-        return "com.wire.passcode"
-    }
-        
-    public var getQuery: [CFString: Any] {
-        let query: [CFString: Any]
-        
-        switch self {
-        case .passcode:
-            query = [kSecClass: kSecClassGenericPassword,
-                     kSecAttrAccount: uniqueIdentifier,
-                     kSecReturnData: true]
-        }
-        
-        return query
-    }
-    
-    public func setQuery<T>(value: T) -> [CFString: Any] {
-        let query: [CFString: Any]
-        
-        switch self {
-        case .passcode:
-            query = [kSecClass: kSecClassGenericPassword,
-                     kSecAttrAccount: uniqueIdentifier,
-                     kSecValueData: value]
-        }
-        
-        return query
-    }
-}
 
-public protocol KeychainItemType {
+public protocol KeychainItem {
     func setQuery<T>(value: T) -> [CFString: Any]
     var getQuery: [CFString: Any] { get }
 }
 
-public struct Keychain {
+public enum Keychain {
         
     public enum KeychainError: Error {
         case failedToStoreItemInKeychain(OSStatus)
@@ -69,14 +36,8 @@ public struct Keychain {
     
     // MARK: - Keychain access
 
-    public static func updateItem<T>(_ item: KeychainItemType, value: T) throws {
-        try deleteItem(item)
-        try storeItem(item, value: value)
-    }
-
-    public static func storeItem<T>(_ item: KeychainItemType, value: T) throws {
+    public static func storeItem<T>(_ item: KeychainItem, value: T) throws {
         let query = item.setQuery(value: value) as CFDictionary
-        
         let status = SecItemAdd(query, nil)
         
         guard status == errSecSuccess else {
@@ -84,7 +45,7 @@ public struct Keychain {
         }
     }
     
-    public static func fetchItem<T>(_ item: KeychainItemType) throws -> T {
+    public static func fetchItem<T>(_ item: KeychainItem) throws -> T {
         var value: CFTypeRef? = nil
         let status = SecItemCopyMatching(item.getQuery as CFDictionary, &value)
         
@@ -95,7 +56,7 @@ public struct Keychain {
         return value as! T
     }
     
-    public static func deleteItem(_ item: KeychainItemType) throws {
+    public static func deleteItem(_ item: KeychainItem) throws {
         let status = SecItemDelete(item.getQuery as CFDictionary)
         
         guard status == errSecSuccess || status == errSecItemNotFound else {
@@ -103,4 +64,8 @@ public struct Keychain {
         }
     }
     
+    public static func updateItem<T>(_ item: KeychainItem, value: T) throws {
+        try deleteItem(item)
+        try storeItem(item, value: value)
+    }
 }
