@@ -308,13 +308,30 @@ extension NSData_ZMSCryptoTests {
                         "e0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff"
         
         // when
-        let decoded = hexString.zmHexDecodedData()
+        let decoded = Data(hexString: hexString)
         
         // then
         let array : Array<UInt8> = Array(0...255)
         let expectedData = Data(array)
         
+        XCTAssertNotNil(decoded)
         XCTAssertEqual(decoded, expectedData)
+    }
+    
+    
+    func testThatNormalStringCanNotBeDecodedIntoData() {
+        // given
+        let normalString = "test"
+        
+        // when
+        let decoded = Data(hexString: normalString)
+        
+        // then
+        let array : Array<UInt8> = Array(0...255)
+        let expectedData = Data(array)
+        
+        XCTAssertNil(decoded)
+        XCTAssertNotEqual(decoded, expectedData)
     }
     
 }
