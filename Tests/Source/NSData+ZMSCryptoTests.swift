@@ -296,6 +296,11 @@ extension NSData_ZMSCryptoTests {
         XCTAssertEqual(encoded, expected)
     }
     
+}
+
+// MARK: - Hex decoding
+extension NSData_ZMSCryptoTests {
+    
     func testThatHexStringCanBeDecodedIntoData() {
         // given
         let hexString = "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f" +
@@ -327,11 +332,80 @@ extension NSData_ZMSCryptoTests {
         let decoded = Data(hexString: normalString)
         
         // then
-        let array : Array<UInt8> = Array(0...255)
-        let expectedData = Data(array)
-        
         XCTAssertNil(decoded)
-        XCTAssertNotEqual(decoded, expectedData)
     }
     
+    func testThatEmptyStringCanBeDecodedIntoEmptyData() {
+        // given
+        let normalString = ""
+        
+        // when
+        let decoded = Data(hexString: normalString)
+        
+        // then
+        XCTAssertTrue(decoded!.isEmpty)
+    }
+    
+    func testThatHexStringWithUnevenNumberOfCharactersCanNotBeDecodedIntoData() {
+        // given
+        let hexString = "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1" //hex string with an uneven number of characters.
+        
+        // when
+        let decoded = Data(hexString: hexString)
+        
+        // then
+        XCTAssertNil(decoded)
+    }
+    
+    func testThatHexStringWithUppercaseCharactersCanBeDecodedIntoData() {
+        // given
+        let hexString = "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D1E1F" //hex strings with uppercase characters.
+        
+        // when
+        let decoded = Data(hexString: hexString)
+        
+        // then
+       let array : Array<UInt8> = Array(0...31)
+       let expectedData = Data(array)
+       
+       XCTAssertNotNil(decoded)
+       XCTAssertEqual(decoded, expectedData)
+    }
+    
+    func testThatHexStringWithAMixOfUpperAndLowercaseCharactersCanBeDecodedIntoData() {
+        // given
+        let hexString = "000102030405060708090a0b0c0d0e0f101112131415161718191A1b1C1d1E1F" //hex strings with a mix of upper and lowercase characters.
+        
+        // when
+        let decoded = Data(hexString: hexString)
+        
+        // then
+       let array : Array<UInt8> = Array(0...31)
+       let expectedData = Data(array)
+       
+       XCTAssertNotNil(decoded)
+       XCTAssertEqual(decoded, expectedData)
+    }
+    
+    func testThatHexStringWithEmojisCanNotBeDecodedIntoData() {
+        // given
+        let hexString = "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D🍔😜🌮🍕" //hex strings with emojis.
+        
+        // when
+        let decoded = Data(hexString: hexString)
+        
+        // then
+       XCTAssertNil(decoded)
+    }
+    
+    func testThatHexStringWithSymbolsCanNotBeDecodedIntoData() {
+        // given
+        let hexString = "000102030405060708090A0B0C0D0E0F101112131415161718191A1B1C1D+%*#" //hex strings with symbols.
+        
+        // when
+        let decoded = Data(hexString: hexString)
+        
+        // then
+       XCTAssertNil(decoded)
+    }
 }

@@ -22,13 +22,11 @@ import Foundation
 // Mapping of @c NSData helper methods to Swift 3 @c Data. See original methods for description.
 public extension Data {
     
-    private static let hexRegex = try! NSRegularExpression(pattern: "^([a-fA-F0-9][a-fA-F0-9])*$", options: [])
-
     init?(hexString: String) {
-        if Data.hexRegex.matches(in: hexString, range: NSMakeRange(0, hexString.count)).isEmpty {
-            return nil // does not look like a hexadecimal string
+        guard let decodedData = hexString.zmHexDecodedData() else {
+            return nil
         }
-        self = hexString.zmHexDecodedData()
+        self = decodedData
     }
     
     func zmMD5Digest() -> Data {

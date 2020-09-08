@@ -19,9 +19,14 @@
 import Foundation
 
 public extension String {
+    private static let hexRegex = try! NSRegularExpression(pattern: "^([a-fA-F0-9][a-fA-F0-9])*$", options: [])
     
     /// A data representation of the hexadecimal bytes in this string.
-    func zmHexDecodedData() -> Data {
+    func zmHexDecodedData() -> Data? {
+        if String.hexRegex.matches(in: self, range: NSMakeRange(0, self.utf16.count)).isEmpty {
+            return nil // does not look like a hexadecimal string
+        }
+        
         // Get the UTF8 characters of this string
         let chars = Array(utf8)
         
