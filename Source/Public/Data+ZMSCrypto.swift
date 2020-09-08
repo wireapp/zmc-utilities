@@ -22,6 +22,10 @@ import Foundation
 // Mapping of @c NSData helper methods to Swift 3 @c Data. See original methods for description.
 public extension Data {
     
+    init?(hexString: String) {
+        self = hexString.zmHexDecodedData()
+    }
+    
     func zmMD5Digest() -> Data {
         return (self as NSData).zmMD5Digest()
     }
