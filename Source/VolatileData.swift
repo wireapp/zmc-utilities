@@ -31,7 +31,7 @@ public typealias Byte = UInt8
 /// **Important**
 ///
 /// Only the memory allocated by an instance of `VolatileData` will be zeroed-out. It is the responsibility
-/// of the developer to prevent data from leaking by creating copies into other types, espcially types with
+/// of the developer to prevent data from leaking by creating copies into other types, especially types with
 /// value semantics (such as `Array` and `Data`) as further copies are made each time the values are passed
 /// around.
 
