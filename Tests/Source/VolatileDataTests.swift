@@ -28,7 +28,7 @@ class VolatileDataTests: XCTestCase {
         let sut = VolatileData(bytes: Data(bytes))
 
         // When
-        let storedBytes = Array(UnsafeBufferPointer(start: sut.pointer, count: bytes.count))
+        let storedBytes = Array(UnsafeBufferPointer(start: sut.pointer, count: sut.byteCount))
 
         // Then
         XCTAssertEqual(storedBytes, bytes)
@@ -44,7 +44,7 @@ class VolatileDataTests: XCTestCase {
             let sut = VolatileData(bytes: Data(bytes))
 
             // Keep a reference to the memory.
-            pointer = UnsafeBufferPointer(start: sut.pointer, count: bytes.count)
+            pointer = UnsafeBufferPointer(start: sut.pointer, count: sut.byteCount)
         }
 
         // Then
