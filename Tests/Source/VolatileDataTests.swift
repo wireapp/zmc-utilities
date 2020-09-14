@@ -22,34 +22,31 @@ import XCTest
 
 class VolatileDataTests: XCTestCase {
 
+    typealias Byte = UInt8
+
     func testThatItCanStoreBytes() {
         // Given
         let bytes: [Byte] = [0, 1, 2, 3, 4, 5]
-        let sut = VolatileData(bytes: Data(bytes))
+        let sut = VolatileData(from: Data(bytes))
 
         // When
-        let storedBytes = Array(UnsafeBufferPointer(start: sut.pointer, count: sut.byteCount))
+        let storedBytes = [Byte](sut._storage)
 
         // Then
         XCTAssertEqual(storedBytes, bytes)
     }
 
-    func testThatItZeroesOutMemoryAfterDeinitialization() {
+    func testThatItResetsBytes() {
         // Given
         let bytes: [Byte] = [0, 1, 2, 3, 4, 5]
-        let pointer: UnsafeBufferPointer<Byte>
+        let sut = VolatileData(from: Data(bytes))
 
-        // When sut goes out of scope and deinitializes...
-        do {
-            let sut = VolatileData(bytes: Data(bytes))
-
-            // Keep a reference to the memory.
-            pointer = UnsafeBufferPointer(start: sut.pointer, count: sut.byteCount)
-        }
+        // When
+        sut.resetBytes()
 
         // Then
-        let bytesInDeallocatedMemory = Array(pointer)
-        XCTAssertEqual(bytesInDeallocatedMemory, [0, 0, 0, 0, 0, 0])
+        let storedBytes = [Byte](sut._storage)
+        XCTAssertEqual(storedBytes, [0, 0, 0, 0, 0, 0])
     }
 
 }

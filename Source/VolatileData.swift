@@ -19,9 +19,6 @@
 
 import Foundation
 
-
-public typealias Byte = UInt8
-
 /// A container for sensitive data.
 ///
 /// `VolatileData` holds a collection of bytes that are required to exist only during the lifetime
@@ -30,48 +27,39 @@ public typealias Byte = UInt8
 ///
 /// **Important**
 ///
-/// Only the memory allocated by an instance of `VolatileData` will be zeroed-out. It is the responsibility
-/// of the developer to prevent data from leaking by creating copies into other types, especially types with
-/// value semantics (such as `Array` and `Data`) as further copies are made each time the values are passed
-/// around.
+/// Only the storage owned by an instance of `VolatileData` will be zeroed-out. Copies of the
+/// `_storage` property (made by assigning its value to a variable or passing it to a function)
+/// will only be zeroed-out if the copies are never written to. See: https://en.wikipedia.org/wiki/Copy-on-write
 
 public class VolatileData {
 
     // MARK: - Properties
 
-    /// A pointer to the first byte.
+    /// The underlying storage.
+    ///
+    /// **Important**: assign only to a constant (with the `let` keyword) to ensure the no
+    /// memory resources are duplicated.
 
-    public let pointer: UnsafeMutablePointer<Byte>
-
-    /// The number of contiguous bytes in the container.
-
-    public let byteCount: Int
+    private(set) public var _storage: Data
 
     // MARK: - Life Cycle
 
-    /// Initialize the container with the given bytes.
+    /// Initialize the container with the given data.
 
-    public init(bytes: Data) {
-        pointer = UnsafeMutablePointer<Byte>.allocate(capacity: bytes.count)
-        byteCount = bytes.count
-
-        zeroOut()
-
-        for (index, byte) in bytes.enumerated() {
-            pointer.advanced(by: index).pointee = byte
-        }
+    public init(from data: Data) {
+        _storage = data
     }
 
     deinit {
-        zeroOut()
-        pointer.deinitialize(count: byteCount)
-        pointer.deallocate()
+        resetBytes()
     }
 
-    // MARK: - Helpers
+    // MARK: - Methods
 
-    private func zeroOut() {
-        pointer.initialize(repeating: .zero, count: byteCount)
+    /// Reset all bytes in the underlying storage to zero.
+
+    public func resetBytes() {
+        _storage.resetBytes(in: (_storage.startIndex)..<(_storage.endIndex))
     }
 
 }
