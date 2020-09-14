@@ -37,7 +37,7 @@ public class VolatileData {
 
     /// The underlying storage.
     ///
-    /// **Important**: assign only to a constant (with the `let` keyword) to ensure the no
+    /// **Important**: assign only to a constant (with the `let` keyword) to ensure that no
     /// memory resources are duplicated.
 
     private(set) public var _storage: Data
