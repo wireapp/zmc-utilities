@@ -200,18 +200,6 @@ extension NSData_ZMSCryptoTests {
         return Data(base64Encoded: base64, options: NSData.Base64DecodingOptions())!
     }
     
-    func testThatItCalculatesTheMD5Digest() {
-        
-        // given
-        let data = samplePlainData
-        
-        // when
-        let digest = data.zmMD5Digest()
-        
-        // then
-        XCTAssertEqual(digest, sampleMD5Result)
-    }
-    
     func testThatItCalculatesTheSHA256Digest() {
         
         // given

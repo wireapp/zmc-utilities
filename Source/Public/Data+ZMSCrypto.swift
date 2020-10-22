@@ -22,10 +22,6 @@ import Foundation
 // Mapping of @c NSData helper methods to Swift 3 @c Data. See original methods for description.
 public extension Data {
     
-    func zmMD5Digest() -> Data {
-        return (self as NSData).zmMD5Digest()
-    }
-    
     func zmHMACSHA256Digest(key: Data) -> Data {
         return (self as NSData).zmHMACSHA256Digest(withKey: key)
     }
