@@ -44,6 +44,9 @@ public enum PasswordCharacterClass: Hashable, Decodable {
 
     /// A user-defined character set.
     case custom(String)
+    
+    /// Password length.
+    case length
 
     // MARK: - Raw Representation
 
@@ -84,6 +87,7 @@ public enum PasswordCharacterClass: Hashable, Decodable {
         case .special: return "special"
         case .asciiPrintable: return "ascii-printable"
         case .custom(let characterSet): return "[\(characterSet)]"
+        case .length: return "length"
         }
     }
 
@@ -117,6 +121,7 @@ public enum PasswordCharacterClass: Hashable, Decodable {
         case .asciiPrintable: return .asciiPrintableSet
         case .special: return CharacterSet.asciiStandardCharacters.inverted
         case .custom(let charactersString): return CharacterSet(charactersIn: charactersString)
+        case .length: return .asciiPrintableSet
         }
     }
 

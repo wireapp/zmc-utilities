@@ -58,8 +58,8 @@ class PasswordRuleSetTests: XCTestCase {
         checkPassword("Päss\u{1F43C}w0rd!", expectedResult: .valid)
 
         // Invalid
-        checkPassword("aA1!", expectedResult: .tooShort)
         checkPassword("aA1!aA1!aA1!aA1!aA1!", expectedResult: .tooLong)
+        checkPassword("aA1!", expectedResult: .missingRequiredClasses([.length]))
         checkPassword("A1!A1!A1!A1!", expectedResult: .missingRequiredClasses([.lowercase]))
         checkPassword("a1!a1!a1!a1!", expectedResult: .missingRequiredClasses([.uppercase]))
         checkPassword("aA!aA!aA!aA!", expectedResult: .missingRequiredClasses([.digits]))

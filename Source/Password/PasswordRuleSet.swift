@@ -114,11 +114,6 @@ public struct PasswordRuleSet: Decodable {
     public func validatePassword(_ password: String) -> PasswordValidationResult {
         let length = password.count
 
-        // Start by checking the length.
-        if length < minimumLength {
-            return .tooShort
-        }
-
         if length > maximumLength {
             return .tooLong
         }
@@ -140,11 +135,15 @@ public struct PasswordRuleSet: Decodable {
         }
 
         // Check if all the character classes are matched.
-        if requiredClasses.all(matchedRequiredClasses.contains) {
-            return .valid
-        } else {
-            return .missingRequiredClasses(requiredClasses.subtracting(matchedRequiredClasses))
-        }
+       var missingRequiredClasses = requiredClasses.subtracting(matchedRequiredClasses)
+        
+       if length < minimumLength {
+           missingRequiredClasses.insert(.length)
+       }
+       
+       return missingRequiredClasses.isEmpty
+           ? .valid
+           : .missingRequiredClasses(missingRequiredClasses)
     }
 
 }
