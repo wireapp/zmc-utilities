@@ -58,13 +58,13 @@ class PasswordRuleSetTests: XCTestCase {
         checkPassword("Päss\u{1F43C}w0rd!", expectedResult: .valid)
 
         // Invalid
-        checkPassword("aA1!aA1!aA1!aA1!aA1!", expectedResult: .tooLong)
-        checkPassword("aA1!", expectedResult: .missingRequiredClasses([.length]))
-        checkPassword("A1!A1!A1!A1!", expectedResult: .missingRequiredClasses([.lowercase]))
-        checkPassword("a1!a1!a1!a1!", expectedResult: .missingRequiredClasses([.uppercase]))
-        checkPassword("aA!aA!aA!aA!", expectedResult: .missingRequiredClasses([.digits]))
-        checkPassword("aA1aA1aA1aA1", expectedResult: .missingRequiredClasses([.special]))
-        checkPassword("aaaaAAAA", expectedResult: .missingRequiredClasses([.digits, .special]))
+        checkPassword("aA1!aA1!aA1!aA1!aA1!", expectedResult: .invalid(violations: [.tooLong]))
+        checkPassword("aA1!", expectedResult: .invalid(violations: [.tooShort]))
+        checkPassword("A1!A1!A1!A1!", expectedResult: .invalid(violations: [.missingRequiredClasses([.lowercase])]))
+        checkPassword("a1!a1!a1!a1!", expectedResult: .invalid(violations: [.missingRequiredClasses([.uppercase])]))
+        checkPassword("aA!aA!aA!aA!", expectedResult: .invalid(violations: [.missingRequiredClasses([.digits])]))
+        checkPassword("aA1aA1aA1aA1", expectedResult: .invalid(violations: [.missingRequiredClasses([.special])]))
+        checkPassword("aaaaAAAA", expectedResult: .invalid(violations: [.missingRequiredClasses([.digits, .special])]))
     }
 
     func checkPassword(_ password: String, expectedResult: PasswordValidationResult, file: StaticString = #file, line: UInt = #line) {
@@ -81,7 +81,7 @@ class PasswordRuleSetTests: XCTestCase {
 
         // THEN
         let dalet = Unicode.Scalar(Int(0x05D3))!
-        XCTAssertEqual(result, .disallowedCharacter(dalet))
+        XCTAssertEqual(result, .invalid(violations: [.disallowedCharacter(dalet)]))
     }
 
 

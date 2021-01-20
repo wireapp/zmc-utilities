@@ -112,10 +112,17 @@ public struct PasswordRuleSet: Decodable {
      */
 
     public func validatePassword(_ password: String) -> PasswordValidationResult {
+        var violations: [PasswordValidationResult.Violation] = []
+        
         let length = password.count
 
+        // Start by checking the length.
+        if length < minimumLength {
+            violations.append(.tooShort)
+        }
+
         if length > maximumLength {
-            return .tooLong
+            violations.append(.tooLong)
         }
 
         // Check for allowed and requiredCharacters
@@ -124,7 +131,8 @@ public struct PasswordRuleSet: Decodable {
 
         for scalar in password.unicodeScalars {
             guard allowedCharacterSet.contains(scalar) else {
-                return .disallowedCharacter(scalar)
+                violations.append(.disallowedCharacter(scalar))
+                return .invalid(violations: violations)
             }
 
             for (requiredClass, requiredCharacters) in requiredCharacterSets where !matchedRequiredClasses.contains(requiredClass) {
@@ -135,15 +143,14 @@ public struct PasswordRuleSet: Decodable {
         }
 
         // Check if all the character classes are matched.
-       var missingRequiredClasses = requiredClasses.subtracting(matchedRequiredClasses)
-        
-       if length < minimumLength {
-           missingRequiredClasses.insert(.length)
-       }
-       
-       return missingRequiredClasses.isEmpty
-           ? .valid
-           : .missingRequiredClasses(missingRequiredClasses)
+        let missingRequiredClasses = requiredClasses.subtracting(matchedRequiredClasses)
+        if  !missingRequiredClasses.isEmpty {
+            violations.append(.missingRequiredClasses(missingRequiredClasses))
+        }
+
+        return violations.isEmpty
+            ? .valid
+            : .invalid(violations: violations)
     }
 
 }
