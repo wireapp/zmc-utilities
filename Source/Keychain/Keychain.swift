@@ -21,22 +21,22 @@ import Security
 import LocalAuthentication
 
 public protocol KeychainItem {
-    associatedtype Value
-    func queryForSetting(value: Value) -> [CFString: Any]
     var queryForGettingValue: [CFString: Any] { get }
+    func queryForSetting<T>(value: T) -> [CFString: Any]
 }
 
 public enum Keychain {
 
     public enum KeychainError: Error {
         case failedToStoreItemInKeychain(OSStatus)
-        case failedToFetchItemFromKeychain(OSStatus?)
+        case failedToFetchItemFromKeychain(OSStatus)
+        case failedToCastFetchedItemFromKeychain(expectedType: Any)
         case failedToDeleteItemFromKeychain(OSStatus)
     }
 
     // MARK: - Keychain access
 
-    public static func storeItem<T: KeychainItem>(_ item: T, value: T.Value) throws {
+    public static func storeItem<T>(_ item: KeychainItem, value: T) throws {
         let query = item.queryForSetting(value: value) as CFDictionary
         let status = SecItemAdd(query, nil)
 
@@ -45,22 +45,7 @@ public enum Keychain {
         }
     }
 
-    public static func fetchItem<T: KeychainItem>(_ item: T) throws -> T.Value {
-        var value: CFTypeRef?
-        let status = SecItemCopyMatching(item.queryForGettingValue as CFDictionary, &value)
-
-        guard status == errSecSuccess else {
-            throw KeychainError.failedToFetchItemFromKeychain(status)
-        }
-
-        guard let valueCasted = value as? T.Value else {
-            throw KeychainError.failedToFetchItemFromKeychain(nil)
-        }
-
-        return valueCasted
-    }
-
-    public static func deleteItem<T: KeychainItem>(_ item: T) throws {
+    public static func deleteItem(_ item: KeychainItem) throws {
         let status = SecItemDelete(item.queryForGettingValue as CFDictionary)
 
         guard status == errSecSuccess || status == errSecItemNotFound else {
@@ -68,8 +53,24 @@ public enum Keychain {
         }
     }
 
-    public static func updateItem<T: KeychainItem>(_ item: T, value: T.Value) throws {
+    public static func fetchItem<T>(_ item: KeychainItem) throws -> T {
+        var value: CFTypeRef?
+        let status = SecItemCopyMatching(item.queryForGettingValue as CFDictionary, &value)
+
+        guard status == errSecSuccess else {
+            throw KeychainError.failedToFetchItemFromKeychain(status)
+        }
+
+        guard let castedValue = value as? T else {
+            throw KeychainError.failedToCastFetchedItemFromKeychain(expectedType: T.self)
+        }
+
+        return castedValue
+    }
+
+    public static func updateItem<T>(_ item: KeychainItem, value: T) throws {
         try deleteItem(item)
         try storeItem(item, value: value)
     }
+
 }
