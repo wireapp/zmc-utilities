@@ -121,6 +121,8 @@
 		A944AEEA265E4D9C00164C79 /* WireSystem.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A944AEE7265E4D9B00164C79 /* WireSystem.xcframework */; };
 		A96755D8265FE98A0062EDC5 /* WireTesting.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A944AEE9265E4D9C00164C79 /* WireTesting.xcframework */; };
 		A96755D9265FE98A0062EDC5 /* WireTesting.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A944AEE9265E4D9C00164C79 /* WireTesting.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A96E00E0265FEF070034A057 /* OCMock.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A944AEE8265E4D9C00164C79 /* OCMock.xcframework */; };
+		A96E00E1265FEF070034A057 /* OCMock.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A944AEE8265E4D9C00164C79 /* OCMock.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A9A3B1F024D9814D001AF38E /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A3B1EF24D9814D001AF38E /* Keychain.swift */; };
 		A9CDCDC2237D9928008A9BC6 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CDCDC1237D9927008A9BC6 /* UIColor+Hex.swift */; };
 		A9CDCDC4237D9A14008A9BC6 /* UIColor+Mixing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CDCDC3237D9A14008A9BC6 /* UIColor+Mixing.swift */; };
@@ -219,6 +221,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				A96E00E1265FEF070034A057 /* OCMock.xcframework in Embed Frameworks */,
 				F1D567B5207BA50700CCDD77 /* WireUtilities.framework in Embed Frameworks */,
 				A96755D9265FE98A0062EDC5 /* WireTesting.xcframework in Embed Frameworks */,
 			);
@@ -436,6 +439,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A96E00E0265FEF070034A057 /* OCMock.xcframework in Frameworks */,
 				F1D567B1207BA40C00CCDD77 /* WireUtilities.framework in Frameworks */,
 				A96755D8265FE98A0062EDC5 /* WireTesting.xcframework in Frameworks */,
 			);
