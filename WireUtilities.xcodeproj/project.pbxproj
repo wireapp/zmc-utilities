@@ -119,7 +119,6 @@
 		87B6489C2076078A002FC9E7 /* Composition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B6489B2076078A002FC9E7 /* Composition.swift */; };
 		87ECBDD51E78457C00596836 /* ExtremeCombiningCharactersValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ECBDD41E78457C00596836 /* ExtremeCombiningCharactersValidator.swift */; };
 		A944AEEA265E4D9C00164C79 /* WireSystem.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A944AEE7265E4D9B00164C79 /* WireSystem.xcframework */; };
-		A944AEEC265E4D9C00164C79 /* OCMock.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A944AEE8265E4D9C00164C79 /* OCMock.xcframework */; };
 		A96755D8265FE98A0062EDC5 /* WireTesting.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A944AEE9265E4D9C00164C79 /* WireTesting.xcframework */; };
 		A96755D9265FE98A0062EDC5 /* WireTesting.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A944AEE9265E4D9C00164C79 /* WireTesting.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A9A3B1F024D9814D001AF38E /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A3B1EF24D9814D001AF38E /* Keychain.swift */; };
@@ -447,7 +446,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A944AEEA265E4D9C00164C79 /* WireSystem.xcframework in Frameworks */,
-				A944AEEC265E4D9C00164C79 /* OCMock.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
