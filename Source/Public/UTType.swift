@@ -46,6 +46,8 @@ public enum UTTagClass {
  * A wrapper around Uniform Type Identifiers.
  */
 
+
+@available(*, deprecated, message: "Use UniformTypeIdentifiers.UTType for 1OS 14+ instead")
 public struct UTType: Equatable {
 
     /// The raw string value to use with the C UTType API.
