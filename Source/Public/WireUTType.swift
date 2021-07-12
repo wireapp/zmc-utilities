@@ -46,7 +46,8 @@ public enum UTTagClass {
  * A wrapper around Uniform Type Identifiers.
  */
 
-public struct UTType: Equatable {
+@available(*, deprecated, message: "use UTType from iOS 14.0+")
+public struct WireUTType: Equatable {
 
     /// The raw string value to use with the C UTType API.
     public let rawValue: CFString
@@ -131,7 +132,7 @@ public struct UTType: Equatable {
      * - returns: Returns `true` if this identifier is equal to or conforms to the second type.
      */
 
-    public func conformsTo(_ uti: UTType) -> Bool {
+    public func conformsTo(_ uti: WireUTType) -> Bool {
         return UTTypeConformsTo(rawValue, uti.rawValue)
     }
 
@@ -148,12 +149,12 @@ public struct UTType: Equatable {
     // MARK: - Equality
 
     /// Checks if the UTType is equal to another type.
-    public static func == (lhs: UTType, rhs: UTType) -> Bool {
+    public static func == (lhs: WireUTType, rhs: WireUTType) -> Bool {
         return UTTypeEqual(lhs.rawValue, rhs.rawValue)
     }
 
     /// Checks if the UTType is equal to another type.
-    public static func == (lhs: UTType, rhs: CFString) -> Bool {
+    public static func == (lhs: WireUTType, rhs: CFString) -> Bool {
         return UTTypeEqual(lhs.rawValue, rhs)
     }
 
